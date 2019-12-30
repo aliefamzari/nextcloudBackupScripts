@@ -27,12 +27,12 @@ function DisableMaintenanceMode() {
 
 ## webSvcUnit Function
 function StopwebSvcUnit() {
-	echo "${currentTime} ${infoStrF} Stopping webSvcUnit service" >> $logPath/ncbackup.log
+	echo "${currentTime} ${infoStrF} Stopping ${webSvcUnit} service" >> $logPath/ncbackup.log
 	if sudo systemctl stop ${webSvcUnit}.service &> /dev/null; then
 		sudo systemctl stop ${webSvcUnit}.service
-		echo "${currentTime} ${infoStrF} webSvcUnit service stopped" >> $logPath/ncbackup.log
+		echo "${currentTime} ${infoStrF} ${webSvcUnit} service stopped" >> $logPath/ncbackup.log
 		else
-			echo "${currentTime} ${errorStrF} webSvcUnit service failed to stop. See journalctl for more details" | tee -a $logPath/ncbackup.log
+			echo "${currentTime} ${errorStrF} ${webSvcUnit} service failed to stop. See journalctl for more details" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${infoStrF} [INFO] Restoring main services.."  | tee -a $logPath/ncbackup.log
 			DisableMaintenanceMode
 			echo "${currentTime} ${errorStrF} NC backup aborted" | tee -a $logPath/ncbackup.log
@@ -42,12 +42,12 @@ function StopwebSvcUnit() {
 	}
 
 function StartwebSvcUnit() {
-	echo "${currentTime} ${infoStrF} Starting webSvcUnit service" >> $logPath/ncbackup.log
+	echo "${currentTime} ${infoStrF} Starting ${webSvcUnit} service" >> $logPath/ncbackup.log
 	if sudo systemctl start ${webSvcUnit}.service &> /dev/null; then
 		sudo systemctl start ${webSvcUnit}.service
-		echo "${currentTime} ${infoStrF} webSvcUnit service Started" >> $logPath/ncbackup.log
+		echo "${currentTime} ${infoStrF} ${webSvcUnit} service Started" >> $logPath/ncbackup.log
 		else
-			echo "${currentTime} ${errorStrF} webSvcUnit service failed to start" | tee -a $logPath/ncbackup.log
+			echo "${currentTime} ${errorStrF} ${webSvcUnit} service failed to start" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${errorStrF} See journalctl for more details" | tee -a $logPath/ncbackup.log
 	fi
 	}
