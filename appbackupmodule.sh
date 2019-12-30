@@ -1,13 +1,13 @@
 #!/bin/bash
 
-######   Module for mainNcBackup.sh       #####
-## 		Module name: appbackupmodule.sh		    ##
-##      Author: Alif Amzari Mohd Azamee         ##
-##		Date: 2019-12-25 				        ##
-##		Job retention: n/a				        ##
-##		Job type: Manual				        ##
-##		Version: 0.1					        ##
-##		Version Control: notGit			        ##
+##		Module for mainNcBackup.sh
+## 		Module name: appbackupmodule.sh	
+##      Author: Alif Amzari Mohd Azamee
+##		Date: 2019-12-25
+##		Job retention: n/a
+##		Job type: Manual
+##		Version: 0.1
+##		Version Control: Git
 ##################################################
 
 # Backing up Web App
