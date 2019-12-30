@@ -22,6 +22,8 @@ if [ -w ${backupUdDir} ]; then
 	else
 		echo "${currentTime} ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "${currentTime} ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
+		StartwebSvcUnit
+		DisableMaintenanceMode
 		echo "${currentTime} ${infoStrUd} See $logPath/ncbackup.log for more details"
     	exit 1
 fi
