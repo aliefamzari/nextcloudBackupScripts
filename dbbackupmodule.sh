@@ -9,6 +9,15 @@
 ##		Version: 0.1				
 ##		Version Control: Git			 
 ##################################################
+# Directory write permission check
+if [ ! -x $backupDbDir ]; then
+	echo "${currentTime} ${errorStrdb} No write permission to destination directory" | tee -a $logPath/ncbackup.log
+	echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
+	DisableMaintenanceMode
+	StartwebSvcUnit
+	echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
+	exit 1
+fi
 
 # Backing up mysql or mariadb
 if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
@@ -21,19 +30,11 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 			echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
 			exit 1
 			else
-				if [ -w ${backupDbDir} ]; then
-					echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-					mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileNameDb}_${currentDate}.sql
-					echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
-					else
-						echo "${currentTime} ${errorStrdb} No write permission to destination directory" | tee -a $logPath/ncbackup.log
-						echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
-						DisableMaintenanceMode
-						StartwebSvcUnit
-						echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
-						exit 1
-				fi
+				echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
+				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileNameDb}_${currentDate}.sql
+				echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
+		
 
 # Backing up postgresql
 	elif [ ${databaseType} = "postgresql" ]; then
@@ -46,21 +47,14 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 				echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
 				exit 1
 				else
-					if [ -w ${backupDbDir} ]; then
-						echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-						PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileNameDb}_${currentDate}.sql
-						echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
-						else 
-							echo "${currentTime} ${errorStrdb} No write permission to destination directory" | tee -a $logPath/ncbackup.log
-							echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
-							DisableMaintenanceMode
-							StartwebSvcUnit
-							echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
-							exit 1
-					fi
-			fi
+					echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
+					PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileNameDb}_${currentDate}.sql
+					echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
+		 	fi
+fi				
+			
 
-fi
+
 
 # Delete old backup if required
 nrOfDbBackups=$(ls -l ${{backupDbDir}} | grep -c 'nextcloud-sqlbkp.*sql')
