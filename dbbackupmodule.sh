@@ -40,8 +40,8 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 	elif [ ${databaseType} = "postgresql" ]; then
 		echo "${currentTime} ${infoStrDb} Database type is $databaseType" >> $logPath/ncbackup.log
 			if [ ! -x $(command -v pg_dump) ]; then
-				echo "Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
-				echo "Restoring main services.." | tee -a $logPath/ncbackup.log
+				echo "${currentTime} ${errorStrdb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+				echo "${currentTime} ${errorStrdb} Restoring main services.." | tee -a $logPath/ncbackup.log
 				DisableMaintenanceMode
 				StartwebSvcUnit
 				echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
