@@ -28,7 +28,7 @@ logPath="/opt/log"									# Change to fit your environment
 
 # TODO: appbackupmodule.sh variables
 webSvcUnit="apache2"								# Usage "apache2" "apache" or "nginx". Change to fit your environment
-nextcloudWebDir="/var/www/html"						# Change to fit your environment
+nextcloudWebDir="/var/www/html/nextcloud"						# Change to fit your environment
 backupAppDir="/opt/nextcloud/data/Backup/APP"		# Destination directory where backup will be saved. Change to fit your environment
 fileNameApp="nextcloud-appbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofAppBackups
 maxNrOfAppBackups=2 								# Specify how many of backups to keep. 0 means Unlimited backup.
@@ -38,7 +38,7 @@ webserverUser="www-data" 							# Change to fit your environment
 databaseType="mariadb"								# Usage "mariadb" "mysql" "postgresql". Change to fit your environment
 backupDbDir="/opt/nextcloud/data/Backup/DATABASE"	# Destination directory where backup will be saved. Change to fit your environment
 dbUserName="nextcloud"								# Change to fit your environment
-dbPasswd="Pass1124"									# Change to fit your environment
+dbPasswd="databasepassword"									# Change to fit your environment
 dbName="nextclouddb"								# Change to fit your environment
 fileNameDb="nextcloud-sqlbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofDbBackups
 maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimited backup.
@@ -111,16 +111,24 @@ for i in ${moduleList[@]}; do
     fi
 done
 
+# Validating destination directory if writeable
+# destDir=(\
+# $backupAppDir \
+# $backupAppDir \
+# $backupUdDir)
+
+# for d in ${destDir[@]}; do
+# 	if [ -w $d ]; then
+# 	echo "${currentTime} ${infoStrgM} $cyan$d$rst ....$green[OK]$rst"
+# 	else 
+# 	echo "${currentTime} ${errorStrM} $cyan$d$rst ....$red[FAILED]$rst"
+# 	echo "${currentTime} ${infoStrgM} Please check your destination directory"
+# 	exit 1
+# 	fi
+# done
+
 ## Head of log file
 echo "${currentTime} ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
-
-# Validating destination directory
-# if ! [ -d ${backupAppDir} && -d ${backupDbDir} && -d ${backupUdDir} ]; then
-# 	echo "${currentTime} [ERROR] Destination directory validation check failed. Backup aborted"
-# 	exit 1
-# 	else
-# 	echo "${currentTime} ${infoStrgM} Destination directory validation success. Proceeding."
-# fi
 
 # Load function
 echo "${currentTime} ${infoStrgM} Loading function ${cyan}ncfb.function$rst" >> $logPath/ncbackup.log
