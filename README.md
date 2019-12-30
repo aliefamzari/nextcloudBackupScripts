@@ -1,6 +1,6 @@
 Features:
 1. Disable/enable desire module to backup (database, application, user data)
-2. Choose how many backups needed independently for each module
+2. Choose how many backups needed, independently for each module
 3. Fully log for troubleshooting
 4. Support nginx or apache web server
 5. Support postgresql, mariadb or mysql database type
