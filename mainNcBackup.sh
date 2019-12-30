@@ -6,7 +6,7 @@
 ##		Job retention: n/a
 ##		Job type: Manual
 ##		Version: 0.1
-##		Version Control: notGit
+##		Version Control: Git
 ##		Modules: -
 ##			appbackupmodule.sh
 ##			dbbackupmodule.sh

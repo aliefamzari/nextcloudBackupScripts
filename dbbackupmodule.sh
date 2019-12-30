@@ -7,13 +7,13 @@
 ##		Job retention: n/a				        ##
 ##		Job type: Manual				        ##
 ##		Version: 0.1					        ##
-##		Version Control: notGit			        ##
+##		Version Control: Git			        ##
 ##################################################
 
 # Backing up mysql or mariadb 
 
 if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
-	echo ""
+	echo "${currentTime} ${infoStrDb} Database type is $databaseType" >> $logPath/ncbackup.log
 		if [ ! -x "$(command -v mysqldump)" ]; then
 			echo "${currentTime} ${errorStrdb} Command 'mysqldump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
@@ -26,9 +26,21 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 				mysqldump --single-transaction -h localhost -u $dbUserName -p$dbPasswd $dbName > ${backupDbDir}/${fileNameDb}_${currentDate}.sql
 				echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
-	# TODO:	
+	
 	elif [ $databaseType = "postgresql" ]; then
-		echo ""
+		echo "${currentTime} ${infoStrDb} Database type is $databaseType" >> $logPath/ncbackup.log
+			if [ ! -x $(command -v pg_dump) ]; then
+				echo "Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+				echo "Restoring main services.." | tee -a $logPath/ncbackup.log
+				DisableMaintenanceMode
+				StartwebSvcUnit
+				echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
+				exit 1
+				else
+					echo "${currentTime} ${infoStrDb} Backing up Database named $dbName to this directory $backupDbDir" >> $logPath/ncbackup.log
+					PGPASSWORD=$dbPasswd pg_dump $dbName -h localhost -U $dbUserName -f ${backupDbDir}/${fileNameDb}_${currentDate}.sql
+					echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
+			fi
 
 fi
 
