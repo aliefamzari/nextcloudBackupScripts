@@ -11,7 +11,7 @@
 ##################################################
 # Directory write permission check
 if [ ! -x $backupDbDir ]; then
-	echo "${currentTime} ${errorStrdb} No write permission to destination directory" | tee -a $logPath/ncbackup.log
+	echo "${currentTime} ${errorStrdb} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 	echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 	DisableMaintenanceMode
 	StartwebSvcUnit
