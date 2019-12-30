@@ -16,7 +16,7 @@ totalsize=`du -skh $sourceUdir 2>/dev/null |awk '{print $1}'`
 echo "${currentTime} ${infoStrUd} Creating backup of Nextcloud Userdata..." | tee -a $logPath/ncbackup.log
 
 if [ -w ${backupUdDir} ]; then 
-	echo "Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
+	echo "${currentTime} ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 	tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
 	echo "${currentTime} ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
 	else
@@ -41,7 +41,7 @@ if [ ${maxNrOfUdBackups} != 0 ]; then
 			echo "${currentTime} ${infoStrUd} ${udFileToRemove} - Remove" >> $logPath/ncbackup.log
 			done
 		else
-			echo "Max number of backups is set to ${maxNrOfUdBackups} to keep. 0 backup removed"
+			echo "${currentTime} ${infoStrUd} Max number of backups is set to ${maxNrOfUdBackups} to keep. 0 backup removed"
 	fi
 		elif [ ${maxNrOfUdBackups} = 0 ]; then
 			echo "${currentTime} ${infoStrUd} Current no of backups available ${nrOfUdBackups}" >> $logPath/ncbackup.log
