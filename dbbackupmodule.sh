@@ -52,8 +52,6 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 					echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		 	fi
 fi				
-			
-
 
 
 # Delete old backup if required
