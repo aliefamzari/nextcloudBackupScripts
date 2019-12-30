@@ -17,9 +17,9 @@ echo "${currentTime} ${infoStrUd} Creating backup of Nextcloud Userdata..." | te
 
 if [ -w ${backupUdDir} ]; then 
 	echo "Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
-    tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
-    echo "${currentTime} ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
-    else
+	tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
+	echo "${currentTime} ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
+	else
 		echo "${currentTime} ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "${currentTime} ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
 		echo "${currentTime} ${infoStrUd} See $logPath/ncbackup.log for more details"
