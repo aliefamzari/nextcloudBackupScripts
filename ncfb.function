@@ -1,14 +1,14 @@
 #!/bin/bash
 
-######   Module for mainNcBackup.sh
+##	Module for mainNcBackup.sh
 ## 		Module name: ncfb.function
 ##      Author: Alif Amzari Mohd Azamee
 ##		Date: 2019-12-25
 ##		Job retention: n/a
 ##		Job type: Manual
 ##		Version: 0.1
-##		Version Control: notGit
-########
+##		Version Control: Git
+##################################
 
 ## OCC Function
 function EnableMaintenanceMode() {

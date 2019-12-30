@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##		Module for mainNcBackup.sh
+##	Module for mainNcBackup.sh
 ## 		Module name: appbackupmodule.sh	
 ##      Author: Alif Amzari Mohd Azamee
 ##		Date: 2019-12-25
