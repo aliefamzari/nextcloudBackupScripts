@@ -87,12 +87,6 @@ sleep 1
 
 echo "${currentTime} ${infoStrgM} Validating $cyan${modulePath}$rst path"
 
-# TODO - Remove THIS!!
-# test -e ${modulePath}/appbackupmodule.sh && echo "${currentTime} ${modulePath}/appbackupmodule.sh [OK]" || echo "${modulePath}/appbackupmodule.sh [FAILED]"
-# test -e ${modulePath}/dbbackupmodule.sh && echo "${currentTime} ${modulePath}/dbbackupmodule.sh [OK]" || echo "${modulePath}/dbbackupmodule.sh [FAILED]"
-# test -e ${modulePath}/userdatabackupmodule.sh && echo "${currentTime} ${modulePath}/userdatabackupmodule.sh [OK]" ||| echo "${modulePath}/userdatabackupmodule.sh [FAILED]"
-# test -e ${modulePath}/ncfb.function && echo "${currentTime} ${modulePath}/ncfb.function [OK]" || echo "${modulePath}/ncfb.function [FAILED]"
-# exit 1
 
 # Module validation
 moduleList=(\
@@ -111,21 +105,6 @@ for i in ${moduleList[@]}; do
     fi
 done
 
-# Validating destination directory if writeable
-# destDir=(\
-# $backupAppDir \
-# $backupAppDir \
-# $backupUdDir)
-
-# for d in ${destDir[@]}; do
-# 	if [ -w $d ]; then
-# 	echo "${currentTime} ${infoStrgM} $cyan$d$rst ....$green[OK]$rst"
-# 	else 
-# 	echo "${currentTime} ${errorStrM} $cyan$d$rst ....$red[FAILED]$rst"
-# 	echo "${currentTime} ${infoStrgM} Please check your destination directory"
-# 	exit 1
-# 	fi
-# done
 
 ## Head of log file
 echo "${currentTime} ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
