@@ -10,5 +10,8 @@ USAGE:
 1. Change settings in the main script to suit your needs and environment
 2. Execute the main script
 
+Not yet supported:
+1. External data backup
+
 Feel free to use/distribute and modify. Code is not POSIX compliant.   
 
