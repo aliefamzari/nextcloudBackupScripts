@@ -1,13 +1,13 @@
 #!/bin/bash
 
-######   Module for mainNcBackup.sh       #####
-## 		Module name: dbbackupmodule.sh			##
-##      Author: Alif Amzari Mohd Azamee         ##
-##		Date: 2019-12-25 				        ##
-##		Job retention: n/a				        ##
-##		Job type: Manual				        ##
-##		Version: 0.1					        ##
-##		Version Control: Git			        ##
+##  Module for mainNcBackup.sh 
+## 		Module name: dbbackupmodule.sh	
+##      Author: Alif Amzari Mohd Azamee 
+##		Date: 2019-12-25 		
+##		Job retention: n/a	
+##		Job type: Manual	
+##		Version: 0.1				
+##		Version Control: Git			 
 ##################################################
 
 # Backing up mysql or mariadb 
