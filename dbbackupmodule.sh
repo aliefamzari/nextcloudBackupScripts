@@ -64,7 +64,7 @@ fi
 
 # Delete old backup if required
 nrOfDbBackups=$(ls -l ${{backupDbDir}} | grep -c 'nextcloud-sqlbkp.*sql')
-nDbBkToRemove=$(( ${nrOfDbBackups} - ${maxNrOfAppBackups} ))
+nDbBkToRemove=$(( ${nrOfDbBackups} - ${maxNrOfDbBackups} ))
 
 echo "${currentTime} ${infoStrDb} Checking number of backups available..."  >> $logPath/ncbackup.log
 
