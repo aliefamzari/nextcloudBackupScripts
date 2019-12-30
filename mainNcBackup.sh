@@ -57,7 +57,7 @@ green=`tput setaf 2`
 cyan=`tput setaf 6`
 rst=`tput sgr0`
 
-# Global and logging variables
+# Global and log variables
 currentTime=`date +"%Y%m%d %H:%M:%S"`
 currentDate=`date +"%Y%m%d_%H%M"`
 infoStrgM="[MAIN] [INFO]"
