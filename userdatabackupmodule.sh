@@ -20,9 +20,9 @@ if [ -w ${backupUdDir} ]; then
     tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
     echo "${currentTime} ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
     else
-    	echo "${currentTime} ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
+		echo "${currentTime} ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "${currentTime} ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
-    	echo "${currentTime} ${infoStrUd} See $logPath/ncbackup.log for more details"
+		echo "${currentTime} ${infoStrUd} See $logPath/ncbackup.log for more details"
     	exit 1
 fi
 
