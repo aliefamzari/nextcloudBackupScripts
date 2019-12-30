@@ -2,7 +2,7 @@
 
 ##	Module for mainNcBackup.sh
 ## 		Module name: appbackupmodule.sh	
-##      Author: Alif Amzari Mohd Azamee
+##		Author: Alif Amzari Mohd Azamee
 ##		Date: 2019-12-25
 ##		Job retention: n/a
 ##		Job type: Manual
