@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## 		Module name: ncfb.function
+## 		Module name: ncfunction.sh
 ##		Author: Alif Amzari Mohd Azamee
 ##		Date: 2019-12-25
 ##		Dependencies: mainNcBackup.sh

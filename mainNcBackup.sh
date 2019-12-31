@@ -11,7 +11,7 @@
 ##			appbackupmodule.sh
 ##			dbbackupmodule.sh
 ##			userdatabackupmodule.sh
-##			ncfb.function
+##			ncfunction.sh
 ##		Requirement: -
 ##			SystemD Unit: Apache2 or nginx
 ##			Database type: mariadb/mysql/postgresql
@@ -93,7 +93,7 @@ moduleList=(\
 ${modulePath}/appbackupmodule.sh \
 ${modulePath}/dbbackupmodule.sh \
 ${modulePath}/userdatabackupmodule.sh \
-${modulePath}/ncfb.function)
+${modulePath}/ncfunction.sh)
 
 for i in ${moduleList[@]}; do
     if [ -x $i ]; then
@@ -110,8 +110,8 @@ done
 echo "${currentTime} ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
 
 # Load function
-echo "${currentTime} ${infoStrgM} Loading function ${cyan}ncfb.function$rst" >> $logPath/ncbackup.log
-. ${modulePath}/ncfb.function  # Function disable/enable maintenance mode
+echo "${currentTime} ${infoStrgM} Loading function ${cyan}ncfunction.sh$rst" >> $logPath/ncbackup.log
+. ${modulePath}/ncfunction.sh  # Function disable/enable maintenance mode
 echo "${currentTime} ${infoStrgM} Function loaded" >> $logPath/ncbackup.log
 sleep 1
 
