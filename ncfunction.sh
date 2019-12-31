@@ -58,6 +58,7 @@ function StartwebSvcUnit() {
 }
 
 ## trapping Ctrl C from user
+# TODO NOT WORKING - TO TEST FURTHER
 function CtrlC() {
 	read -p "Backup interupted by user. Disable maintenance mode? [y/n] " -n 1 -r
 	echo
