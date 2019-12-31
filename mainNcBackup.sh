@@ -58,7 +58,6 @@ cyan=`tput setaf 6`
 rst=`tput sgr0`
 
 # Global and log variables
-# currentTime=`date +"%Y%m%d %H:%M:%S"`
 currentDate=`date +"%Y%m%d_%H%M"`
 infoStrgM="[MAIN] [INFO]"
 infostrA="[APP] [INFO]"
@@ -112,56 +111,56 @@ echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} NC backup started..." | tee $logPa
 # Load function
 echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Loading function ${cyan}ncfunction.sh$rst" >> $logPath/ncbackup.log
 . ${modulePath}/ncfunction.sh  # Function disable/enable maintenance mode
-echo "${currentTime} ${infoStrgM} Function loaded" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Function loaded" >> $logPath/ncbackup.log
 sleep 1
 
 # Capture Ctrl+C from user in case of premature interruption
 trap CtrlC INT
 
 # Enabling maintenance mode
-echo "${currentTime} ${infoStrgM} Attempting to enable maintenance mode" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Attempting to enable maintenance mode" >> $logPath/ncbackup.log
 EnableMaintenanceMode
 sleep 1
 
 # Stopping webSvcUnit service
-echo "${currentTime} ${infoStrgM} Attempting to stop $webSvcUnit service" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Attempting to stop $webSvcUnit service" >> $logPath/ncbackup.log
 StopwebSvcUnit
 sleep 1
 
 # Application Backup Module
-echo "${currentTime} ${infoStrgM} Invoking App backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking App backup module" >> $logPath/ncbackup.log
 if [ ${applicationBackup} = "disable" ]; then
-    echo "${currentTime} ${infoStrgM} App backup module disabled. Omitting App backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} App backup module disabled. Omitting App backup procedure" >> $logPath/ncbackup.log
     elif [ ${applicationBackup} = "enable" ]; then
         . ${modulePath}/appbackupmodule.sh # Executing application backup module
 fi
 sleep 1
 
 # Database Backup Module
-echo "${currentTime} ${infoStrgM} Invoking Database backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking Database backup module" >> $logPath/ncbackup.log
 if [ ${databaseBackup} = "disable" ]; then
-    echo "${currentTime} ${infoStrgM} Database backup module disabled. Omitting Database backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} Database backup module disabled. Omitting Database backup procedure" >> $logPath/ncbackup.log
     elif [ ${databaseBackup} = "enable" ]; then
         . /${modulePath}/dbbackupmodule.sh # Executing database backup module
 fi
 sleep 1
 
 # User Data Backup Module
-echo "${currentTime} ${infoStrgM} Invoking UserData backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking UserData backup module" >> $logPath/ncbackup.log
 if [ ${userDataBackup} = "disable" ]; then
-    echo "${currentTime} ${infoStrgM} Data backup disabled. Omitting User Data backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} Data backup disabled. Omitting User Data backup procedure" >> $logPath/ncbackup.log
     elif [ ${userDataBackup} = "enable" ]; then
         . ${modulePath}/userdatabackupmodule.sh # Executing User Data backup module
 fi
 sleep 1
-echo "${currentTime} ${infoStrgM} NC Backup completed" | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} NC Backup completed" | tee -a $logPath/ncbackup.log
 
 # Restoring Services
-echo "${currentTime} ${infoStrgM} Restoring main services.." | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Restoring main services.." | tee -a $logPath/ncbackup.log
 StartwebSvcUnit
 DisableMaintenanceMode
-echo "${currentTime} ${infoStrgM} End of script execution" | tee -a $logPath/ncbackup.log
-echo "${currentTime} ${infoStrgM} See $logPath/ncbackup.log for more details"
+echo "$(currentTime) ${infoStrgM} End of script execution" | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} See $logPath/ncbackup.log for more details"
 
 exit 0
 ## End of file

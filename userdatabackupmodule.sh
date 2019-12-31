@@ -13,18 +13,18 @@
 # Backing up UserData
 totalsize=`du -skh $sourceUdir 2>/dev/null |awk '{print $1}'`
 
-echo "${currentTime} ${infoStrUd} Creating backup of Nextcloud Userdata..." | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrUd} Creating backup of Nextcloud Userdata..." | tee -a $logPath/ncbackup.log
 
 if [ -w ${backupUdDir} ]; then 
-	echo "${currentTime} ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 	tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
-	echo "${currentTime} ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
 	else
-		echo "${currentTime} ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
-		echo "${currentTime} ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
 		StartwebSvcUnit
 		DisableMaintenanceMode
-		echo "${currentTime} ${infoStrUd} See $logPath/ncbackup.log for more details"
+		echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
     	exit 1
 fi
 
@@ -32,21 +32,21 @@ fi
 nrOfUdBackups=$(ls -l ${backupUdDir} | grep -c 'nextcloud-udbkp.*gz')
 nUdbkToRemove=$(( $nrOfUdBackups - $maxNrOfUdBackups ))
 
-echo "${currentTime} ${errorStrUd} Checking number of backups available..."  >> $logPath/ncbackup.log
+echo "$(currentTime) ${errorStrUd} Checking number of backups available..."  >> $logPath/ncbackup.log
 
 if [ ${maxNrOfUdBackups} != 0 ]; then
-	echo "${currentTime} ${infoStrUd} Current number of backup available $nrOfUdBackups" >> $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrUd} Current number of backup available $nrOfUdBackups" >> $logPath/ncbackup.log
 	if [ ${nrOfUdBackups} -gt ${maxNrOfUdBackups} ]; then		
-		echo "${currentTime} ${infoStrUd} Max number of backup(s) is set to ${maxNrOfUdBackups}. Removing ${nUdbkToRemove} old backup(s)" >> $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrUd} Max number of backup(s) is set to ${maxNrOfUdBackups}. Removing ${nUdbkToRemove} old backup(s)" >> $logPath/ncbackup.log
 		ls -t ${backupUdDir} | grep 'nextcloud-udbkp.*gz' | tail -$nUdbkToRemove |while read -r udFileToRemove; do
 			rm "${backupUdDir}/${udFileToRemove}"
-			echo "${currentTime} ${infoStrUd} ${udFileToRemove} - Remove" >> $logPath/ncbackup.log
+			echo "$(currentTime) ${infoStrUd} ${udFileToRemove} - Remove" >> $logPath/ncbackup.log
 			done
 		else
-			echo "${currentTime} ${infoStrUd} Max number of backups is set to ${maxNrOfUdBackups} to keep. 0 backup removed"
+			echo "$(currentTime) ${infoStrUd} Max number of backups is set to ${maxNrOfUdBackups} to keep. 0 backup removed"
 	fi
 		elif [ ${maxNrOfUdBackups} = 0 ]; then
-			echo "${currentTime} ${infoStrUd} Current no of backups available ${nrOfUdBackups}" >> $logPath/ncbackup.log
-			echo "${currentTime} ${infoStrUd} Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
+			echo "$(currentTime) ${infoStrUd} Current no of backups available ${nrOfUdBackups}" >> $logPath/ncbackup.log
+			echo "$(currentTime) ${infoStrUd} Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
 fi
-echo "${currentTime} ${infoStrUd} Nextcloud UserData backup completed" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" >> $logPath/ncbackup.log
