@@ -83,9 +83,9 @@ echo "$(currentTime) ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
 echo "$(currentTime) ${infoStrgM} Validating $cyan$logPath$rst path for logging"
 if [ -w ${logPath} ]; then
-    echo "$(currentTime) ${infoStrgM} $cyan$logPath$rst validation success"
+    echo "$(currentTime) ${infoStrgM} $log ....$green[OK]$rst"
     else
-        echo "$(currentTime) ${errorStrM} $cyan$logPath$rst validation failed. No write permission. Backup aborted"
+        echo "$(currentTime) ${errorStrM} $logPath No write permission. Backup aborted ....$red[FAILED]$rst"
         exit 1
 fi
 sleep 1
@@ -102,10 +102,10 @@ ${modulePath}/ncfunction.sh)
 
 for i in ${moduleList[@]}; do
     if [ -x $i ]; then
-    echo "$(currentTime) ${infoStrgM} $cyan$i$rst ....$green[OK]$rst"
+    echo "$(currentTime) ${infoStrgM} $i ....$green[OK]$rst"
     else
-        echo "$(currentTime) ${errorStrM} $cyan$i$rst ....$red[FAILED]$rst"
-		echo "$(currentTime) ${infoStrgM} Please check your module path"
+        echo "$(currentTime) ${errorStrM} $i ....$red[FAILED]$rst"
+		echo "$(currentTime) ${infoStrgM} Please check your module path. Backup aborted"
         exit 1
     fi
 done

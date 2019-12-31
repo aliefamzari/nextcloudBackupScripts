@@ -13,14 +13,14 @@
 ## OCC Function
 function EnableMaintenanceMode() {
 	echo "$(currentTime) ${infoStrF} Set maintenance mode for Nextcloud.."  >> $logPath/ncbackup.log
-	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --on
-	echo "$(currentTime) ${infoStrF} Maintenance mode enabled"  >> $logPath/ncbackup.log
+	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --on 1> /dev/null
+	echo "$(currentTime) ${infoStrF} Maintenance mode enabled"  | tee -a $logPath/ncbackup.log
 }
 
 function DisableMaintenanceMode() {
 	echo "$(currentTime) ${infoStrF} Switching off maintenance mode.." >> $logPath/ncbackup.log
-	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --off
-	echo "$(currentTime) ${infoStrF} Maintenance mode disabled" >> $logPath/ncbackup.log
+	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --off 1> /dev/null
+	echo "$(currentTime) ${infoStrF} Maintenance mode disabled" | tee -a $logPath/ncbackup.log
 }
 
 
@@ -29,7 +29,7 @@ function StopwebSvcUnit() {
 	echo "$(currentTime) ${infoStrF} Stopping ${webSvcUnit} service" >> $logPath/ncbackup.log
 	if sudo systemctl stop ${webSvcUnit}.service &> /dev/null; then
 		sudo systemctl stop ${webSvcUnit}.service
-		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service stopped" >> $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service stopped" | tee -a $logPath/ncbackup.log
 		else
 			echo "$(currentTime) ${errorStrF} ${webSvcUnit} service failed to stop. See journalctl for more details" | tee -a $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrF} [INFO] Restoring main services.."  | tee -a $logPath/ncbackup.log
@@ -44,7 +44,7 @@ function StartwebSvcUnit() {
 	echo "$(currentTime) ${infoStrF} Starting ${webSvcUnit} service" >> $logPath/ncbackup.log
 	if sudo systemctl start ${webSvcUnit}.service &> /dev/null; then
 		sudo systemctl start ${webSvcUnit}.service
-		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service Started" >> $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service Started" | tee -a $logPath/ncbackup.log
 		else
 			echo "$(currentTime) ${errorStrF} ${webSvcUnit} service failed to start" | tee -a $logPath/ncbackup.log
 			echo "$(currentTime) ${errorStrF} See journalctl for more details" | tee -a $logPath/ncbackup.log
