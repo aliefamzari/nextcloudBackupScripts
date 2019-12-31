@@ -13,8 +13,8 @@
 if [ ! -x $backupDbDir ]; then
 	echo "${currentTime} ${errorStrdb} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 	echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
-	DisableMaintenanceMode
 	StartwebSvcUnit
+	DisableMaintenanceMode
 	echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
 	exit 1
 fi
@@ -25,8 +25,8 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 		if [ ! -x "$(command -v mysqldump)" ]; then
 			echo "${currentTime} ${errorStrdb} Command 'mysqldump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
-			DisableMaintenanceMode
 			StartwebSvcUnit
+			DisableMaintenanceMode
 			echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
 			exit 1
 			else
@@ -42,8 +42,8 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 			if [ ! -x $(command -v pg_dump) ]; then
 				echo "${currentTime} ${errorStrdb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
 				echo "${currentTime} ${errorStrdb} Restoring main services.." | tee -a $logPath/ncbackup.log
-				DisableMaintenanceMode
 				StartwebSvcUnit
+				DisableMaintenanceMode
 				echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
 				exit 1
 				else
