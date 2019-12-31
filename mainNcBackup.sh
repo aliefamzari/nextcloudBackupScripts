@@ -70,18 +70,18 @@ errorStrDb="$red[ERROR]$rst [DB]"
 errorStrUd="$red[ERROR]$rst [USERDATA]"
 errorStrF="$red[ERROR]$rst [FUNCTION]"
 
-# CurrentTime
+# CurrentTime function
 function currentTime() {
 	echo $(date +"%Y%m%d %H:%M:%S")
 }
 
 #######################################################################################################################
 # TODO : PATH CHECK nextcloudWebDir="/var/www/html/nextcloud"
-# TODO : TO move fileName variables to module	
+
 # Logpath validation
 echo "$(currentTime) ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
-echo "$(currentTime) ${infoStrgM} Validating $cyan$logPath$rst path for logging"
+echo "$(currentTime) ${infoStrgM} Validating $logPath path for logging"
 if [ -w ${logPath} ]; then
     echo "$(currentTime) ${infoStrgM} $logPath ....$green[OK]$rst"
     else
@@ -90,10 +90,20 @@ if [ -w ${logPath} ]; then
 fi
 sleep 1
 
-echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path"
-
+# OCC path validation
+echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"
+if [ -e ${nextcloudWebDir}/occ ]; then
+	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst "
+	else
+		echo "$(currentTime) ${errorStrM} ${nextcloudWebDir}/occ ....$red[FAILED]$rst"
+		echo "$(currentTime) ${infoStrgM} Please check your ${nextcloudWebDir}/occ path. Backup aborted"
+		exit 1
+fi
+sleep 1
 
 # Module validation
+echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path"
+
 moduleList=(\
 ${modulePath}/appbackupmodule.sh \
 ${modulePath}/dbbackupmodule.sh \
