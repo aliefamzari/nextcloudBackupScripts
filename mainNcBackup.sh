@@ -71,7 +71,7 @@ errorStrUd="$red[ERROR]$rst [USERDATA]"
 errorStrF="$red[ERROR]$rst [FUNCTION]"
 
 #######################################################################################################################
-
+# TODO : PATH CHECK nextcloudWebDir="/var/www/html/nextcloud"	
 # Logpath validation
 echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
@@ -118,37 +118,37 @@ sleep 1
 trap CtrlC INT
 
 # Enabling maintenance mode
-echo "$(currentTime) ${infoStrgM} Attempting to enable maintenance mode" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Attempting to enable maintenance mode" | tee -a $logPath/ncbackup.log
 EnableMaintenanceMode
 sleep 1
 
 # Stopping webSvcUnit service
-echo "$(currentTime) ${infoStrgM} Attempting to stop $webSvcUnit service" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Attempting to stop $webSvcUnit service" | tee -a $logPath/ncbackup.log
 StopwebSvcUnit
 sleep 1
 
 # Application Backup Module
-echo "$(currentTime) ${infoStrgM} Invoking App backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking App backup module" | tee -a $logPath/ncbackup.log
 if [ ${applicationBackup} = "disable" ]; then
-    echo "$(currentTime) ${infoStrgM} App backup module disabled. Omitting App backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} App backup module disabled. Omitting App backup procedure" | tee -a $logPath/ncbackup.log
     elif [ ${applicationBackup} = "enable" ]; then
         . ${modulePath}/appbackupmodule.sh # Executing application backup module
 fi
 sleep 1
 
 # Database Backup Module
-echo "$(currentTime) ${infoStrgM} Invoking Database backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking Database backup module" | tee -a $logPath/ncbackup.log
 if [ ${databaseBackup} = "disable" ]; then
-    echo "$(currentTime) ${infoStrgM} Database backup module disabled. Omitting Database backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} Database backup module disabled. Omitting Database backup procedure" | tee -a $logPath/ncbackup.log
     elif [ ${databaseBackup} = "enable" ]; then
         . /${modulePath}/dbbackupmodule.sh # Executing database backup module
 fi
 sleep 1
 
 # User Data Backup Module
-echo "$(currentTime) ${infoStrgM} Invoking UserData backup module" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Invoking UserData backup module" | tee -a $logPath/ncbackup.log
 if [ ${userDataBackup} = "disable" ]; then
-    echo "$(currentTime) ${infoStrgM} Data backup disabled. Omitting User Data backup procedure" >> $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} Data backup disabled. Omitting User Data backup procedure" | tee -a $logPath/ncbackup.log
     elif [ ${userDataBackup} = "enable" ]; then
         . ${modulePath}/userdatabackupmodule.sh # Executing User Data backup module
 fi
