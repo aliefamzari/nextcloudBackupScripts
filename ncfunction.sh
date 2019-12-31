@@ -10,19 +10,24 @@
 ##		Version Control: Git
 ##################################
 
+# CurrentTime
+function currentTime() {
+	echo $(date +"%Y%m%d %H:%M:%S")
+}
+
 ## OCC Function
 function EnableMaintenanceMode() {
 	echo "${currentTime} ${infoStrF} Set maintenance mode for Nextcloud.."  >> $logPath/ncbackup.log
 	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --on
 	echo "${currentTime} ${infoStrF} Maintenance mode enabled"  >> $logPath/ncbackup.log
 	echo
-	}
+}
 
 function DisableMaintenanceMode() {
 	echo "${currentTime} ${infoStrF} Switching off maintenance mode.." >> $logPath/ncbackup.log
 	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --off
 	echo "${currentTime} ${infoStrF} Maintenance mode disabled" >> $logPath/ncbackup.log
-	}
+}
 
 
 ## webSvcUnit Function
@@ -39,7 +44,7 @@ function StopwebSvcUnit() {
 			echo "${currentTime} $red[ERROR]$rst See $logPath/ncbackup.log for more details"
 			exit 1
 	fi
-	}
+}
 
 function StartwebSvcUnit() {
 	echo "${currentTime} ${infoStrF} Starting ${webSvcUnit} service" >> $logPath/ncbackup.log
@@ -50,7 +55,7 @@ function StartwebSvcUnit() {
 			echo "${currentTime} ${errorStrF} ${webSvcUnit} service failed to start" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${errorStrF} See journalctl for more details" | tee -a $logPath/ncbackup.log
 	fi
-	}
+}
 
 ## trapping Ctrl C from user
 function CtrlC() {
@@ -66,3 +71,4 @@ function CtrlC() {
 	fi
 	exit 1
 }
+

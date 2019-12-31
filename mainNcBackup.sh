@@ -58,7 +58,7 @@ cyan=`tput setaf 6`
 rst=`tput sgr0`
 
 # Global and log variables
-currentTime=`date +"%Y%m%d %H:%M:%S"`
+# currentTime=`date +"%Y%m%d %H:%M:%S"`
 currentDate=`date +"%Y%m%d_%H%M"`
 infoStrgM="[MAIN] [INFO]"
 infostrA="[APP] [INFO]"
@@ -74,18 +74,18 @@ errorStrF="[FUNCTION] $red[ERROR]$rst"
 #######################################################################################################################
 
 # Logpath validation
-echo "${currentTime} ${infoStrgM} Starting script mainNcBackup.sh"
+echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
-echo "${currentTime} ${infoStrgM} Validating $cyan$logPath$rst path for logging"
+echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Validating $cyan$logPath$rst path for logging"
 if [ -w ${logPath} ]; then
-    echo "${currentTime} ${infoStrgM} $cyan$logPath$rst validation success"
+    echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} $cyan$logPath$rst validation success"
     else
-        echo "${currentTime} ${errorStrM} $cyan$logPath$rst validation failed. No write permission. Backup aborted"
+        echo "$(date +"%Y%m%d %H:%M:%S") ${errorStrM} $cyan$logPath$rst validation failed. No write permission. Backup aborted"
         exit 1
 fi
 sleep 1
 
-echo "${currentTime} ${infoStrgM} Validating $cyan${modulePath}$rst path"
+echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Validating $cyan${modulePath}$rst path"
 
 
 # Module validation
@@ -97,20 +97,20 @@ ${modulePath}/ncfunction.sh)
 
 for i in ${moduleList[@]}; do
     if [ -x $i ]; then
-    echo "${currentTime} ${infoStrgM} $cyan$i$rst ....$green[OK]$rst"
+    echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} $cyan$i$rst ....$green[OK]$rst"
     else
-        echo "${currentTime} ${errorStrM} $cyan$i$rst ....$red[FAILED]$rst"
-		echo "${currentTime} ${infoStrgM} Please check your module path"
+        echo "$(date +"%Y%m%d %H:%M:%S") ${errorStrM} $cyan$i$rst ....$red[FAILED]$rst"
+		echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Please check your module path"
         exit 1
     fi
 done
 
 
 ## Head of log file
-echo "${currentTime} ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
+echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
 
 # Load function
-echo "${currentTime} ${infoStrgM} Loading function ${cyan}ncfunction.sh$rst" >> $logPath/ncbackup.log
+echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Loading function ${cyan}ncfunction.sh$rst" >> $logPath/ncbackup.log
 . ${modulePath}/ncfunction.sh  # Function disable/enable maintenance mode
 echo "${currentTime} ${infoStrgM} Function loaded" >> $logPath/ncbackup.log
 sleep 1
