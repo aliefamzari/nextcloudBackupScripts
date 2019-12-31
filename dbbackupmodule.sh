@@ -32,9 +32,9 @@ case ${databaseType} in
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
 			exit 1
 			else
-				echo "$(currentTime) ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
 				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql
-				echo "$(currentTime) ${infoStrDb} Backup ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
 	;;
 	postgresql) 
@@ -47,9 +47,9 @@ case ${databaseType} in
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
 			exit 1
 			else
-				echo "$(currentTime) ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} pg_dump database ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
 				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileName}_${currentDate}.sql
-				echo "$(currentTime) ${infoStrDb} Backup ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
 	;;
 	*) 

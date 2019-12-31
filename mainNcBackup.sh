@@ -72,7 +72,7 @@ errorStrF="$red[ERROR]$rst [FUNCTION]"
 
 # CurrentTime
 function currentTime() {
-	echo $(currentTime)
+	echo $(date +"%Y%m%d %H:%M:%S")
 }
 
 #######################################################################################################################
@@ -83,14 +83,14 @@ echo "$(currentTime) ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
 echo "$(currentTime) ${infoStrgM} Validating $cyan$logPath$rst path for logging"
 if [ -w ${logPath} ]; then
-    echo "$(currentTime) ${infoStrgM} $log ....$green[OK]$rst"
+    echo "$(currentTime) ${infoStrgM} $logPath ....$green[OK]$rst"
     else
         echo "$(currentTime) ${errorStrM} $logPath No write permission. Backup aborted ....$red[FAILED]$rst"
         exit 1
 fi
 sleep 1
 
-echo "$(currentTime) ${infoStrgM} Validating $cyan${modulePath}$rst path"
+echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path"
 
 
 # Module validation
@@ -115,7 +115,7 @@ done
 echo "$(currentTime) ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
 
 # Load function
-echo "$(currentTime) ${infoStrgM} Loading function ${cyan}ncfunction.sh$rst" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Loading function ncfunction.sh" >> $logPath/ncbackup.log
 . ${modulePath}/ncfunction.sh  # Function disable/enable maintenance mode
 echo "$(currentTime) ${infoStrgM} Function loaded" >> $logPath/ncbackup.log
 sleep 1
@@ -129,7 +129,7 @@ EnableMaintenanceMode
 sleep 1
 
 # Stopping webSvcUnit service
-echo "$(currentTime) ${infoStrgM} Attempting to stop $webSvcUnit service" | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Stopping $webSvcUnit service" | tee -a $logPath/ncbackup.log
 StopwebSvcUnit
 sleep 1
 

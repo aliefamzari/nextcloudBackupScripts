@@ -58,6 +58,7 @@ function CtrlC() {
 	echo
 	if [[ $yesNo =~ ^[Yy]$ ]]; then
 		DisableMaintenanceMode
+		StartwebSvcUnit
 		echo "$(currentTime) ${errorStrF} Interrupted by user. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "$(currentTime) $red[ERROR]$rst See $logPath/ncbackup.log for more details"
 		else
