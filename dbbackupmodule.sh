@@ -19,9 +19,10 @@ if [ ! -x $backupDbDir ]; then
 	exit 1
 fi
 
-# Backing up mysql or mariadb
-if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
-	echo "${currentTime} ${infoStrDb} Database type is $databaseType" >> $logPath/ncbackup.log
+# Case for mysql, mariadb or postgresql
+case ${databaseType} in
+	mysql|mariadb) 
+	echo "${currentTime} ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
 		if [ ! -x "$(command -v mysqldump)" ]; then
 			echo "${currentTime} ${errorStrdb} Command 'mysqldump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
 			echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
@@ -34,24 +35,31 @@ if [ ${databaseType} = "mariadb" ] || [ ${databaseType} = "mysql" ]; then
 				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileNameDb}_${currentDate}.sql
 				echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
-		
-
-# Backing up postgresql
-	elif [ ${databaseType} = "postgresql" ]; then
-		echo "${currentTime} ${infoStrDb} Database type is $databaseType" >> $logPath/ncbackup.log
-			if [ ! -x $(command -v pg_dump) ]; then
-				echo "${currentTime} ${errorStrdb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
-				echo "${currentTime} ${errorStrdb} Restoring main services.." | tee -a $logPath/ncbackup.log
-				StartwebSvcUnit
-				DisableMaintenanceMode
-				echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
-				exit 1
-				else
-					echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-					PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileNameDb}_${currentDate}.sql
-					echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
-		 	fi
-fi				
+	;;
+	postgresql) 
+	echo "${currentTime} ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
+		if [ ! -x "$(command -v pg_dump)" ]; then
+			echo "${currentTime} ${errorStrdb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+			echo "${currentTime} ${errorStrdb} Restoring main services.." | tee -a $logPath/ncbackup.log
+			StartwebSvcUnit
+			DisableMaintenanceMode
+			echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details"
+			exit 1
+			else
+				echo "${currentTime} ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
+				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileNameDb}_${currentDate}.sql
+				echo "${currentTime} ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
+		fi
+	;;
+	*) 
+	echo "${currentTime} ${errorStrdb} Something not quite right. Check databaseType \"${databaseType}\" in main script. Backup aborted" | tee -a $logPath/ncbackup.log
+	echo "${currentTime} ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
+	StartwebSvcUnit
+	DisableMaintenanceMode
+	echo "${currentTime} ${infoStrDb} See $logPath/ncbackup.log for more details" | tee -a $logPath/ncbackup.log
+	exit 1
+	;;
+esac		
 
 
 # Delete old backup if required
