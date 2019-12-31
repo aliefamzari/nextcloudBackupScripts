@@ -71,7 +71,8 @@ errorStrUd="$red[ERROR]$rst [USERDATA]"
 errorStrF="$red[ERROR]$rst [FUNCTION]"
 
 #######################################################################################################################
-# TODO : PATH CHECK nextcloudWebDir="/var/www/html/nextcloud"	
+# TODO : PATH CHECK nextcloudWebDir="/var/www/html/nextcloud"
+# TODO : TO move fileName variables to module	
 # Logpath validation
 echo "$(date +"%Y%m%d %H:%M:%S") ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
