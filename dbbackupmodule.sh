@@ -72,8 +72,8 @@ if [ ${maxNrOfDbBackups} != 0 ]; then
 	echo "${currentTime} ${infoStrDb} Current number of backup available $nrOfDbBackups" >> $logPath/ncbackup.log
 		if [ ${nrOfDbBackups} -gt ${maxNrOfDbBackups} ]; then		
 			echo "${currentTime} ${infoStrDb} Max number of backups is set to $maxNrOfDbBackups. Removing $nDbBkToRemove old backups" >> $logPath/ncbackup.log
-			ls -t ${{backupDbDir}} | grep 'nextcloud-sqlbkp.*sql' | tail -$nDbBkToRemove |while read -r dbBkToRemove; do
-				rm "${{backupDbDir}}/${dbBkToRemove}"
+			ls -t ${backupDbDir} | grep 'nextcloud-sqlbkp.*sql' | tail -$nDbBkToRemove |while read -r dbBkToRemove; do
+				rm "${backupDbDir}/${dbBkToRemove}"
 				echo "${currentTime} ${infoStrDb} ${dbBkToRemove} - Remove" >> $logPath/ncbackup.log
 				done
 			else
