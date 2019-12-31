@@ -10,8 +10,24 @@ USAGE:
 1. Change settings in the main script to suit your needs and environment
 2. Execute the main script
 
+INSTALLATION:
+1. git clone https://github.com/aliefamzari/nextcloudBackupScripts/archive/master.zip
+2. cd nextcloudBackupScripts
+3. chmod +x *.sh
+4. Execute ./mainNcBackup.sh
+
+or
+
+1. wget https://github.com/aliefamzari/nextcloudBackupScripts/archive/master.zip
+2. unzip master.zip
+3. cd nextcloudBackupScripts
+4. chmod +x *.sh
+5. Edit mainNcBackup.sh variables to your environment
+6. Execute ./mainNcBackup.Sh
+
+
 Not yet supported:
 1. External data backup
 
-Feel free to use/distribute and modify. Code is not POSIX compliant.   
+Feel free to use, distribute and modify. Code is not POSIX compliant.   
 
