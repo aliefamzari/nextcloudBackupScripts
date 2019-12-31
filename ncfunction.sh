@@ -10,11 +10,6 @@
 ##		Version Control: Git
 ##################################
 
-# CurrentTime
-function currentTime() {
-	echo $(date +"%Y%m%d %H:%M:%S")
-}
-
 ## OCC Function
 function EnableMaintenanceMode() {
 	echo "$(currentTime) ${infoStrF} Set maintenance mode for Nextcloud.."  >> $logPath/ncbackup.log
