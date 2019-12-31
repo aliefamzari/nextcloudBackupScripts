@@ -149,7 +149,7 @@ sleep 1
 # User Data Backup Module
 echo "$(currentTime) ${infoStrgM} Invoking UserData backup module" | tee -a $logPath/ncbackup.log
 if [ ${userDataBackup} = "disable" ]; then
-    echo "$(currentTime) ${infoStrgM} Data backup disabled. Omitting User Data backup procedure" | tee -a $logPath/ncbackup.log
+    echo "$(currentTime) ${infoStrgM} UserData backup disabled. Omitting UserData backup procedure" | tee -a $logPath/ncbackup.log
     elif [ ${userDataBackup} = "enable" ]; then
         . ${modulePath}/userdatabackupmodule.sh # Executing User Data backup module
 fi
