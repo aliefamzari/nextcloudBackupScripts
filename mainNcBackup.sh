@@ -59,16 +59,16 @@ rst=`tput sgr0`
 
 # Global and log variables
 currentDate=`date +"%Y%m%d_%H%M"`
-infoStrgM="[MAIN] [INFO]"
-infostrA="[APP] [INFO]"
-infoStrDb="[DB] [INFO]"
-infoStrUd="[USERDATA] [INFO]"
-infoStrF="[FUNCTION] [INFO]"
-errorStrM="[MAIN] $red[ERROR]$rst"
-errorStrA="[APP] $red[ERROR]$rst"
-errorStrDb="[DB] $red[ERROR]$rst"
-errorStrUd="[USERDATA] $red[ERROR]$rst"
-errorStrF="[FUNCTION] $red[ERROR]$rst"
+infoStrgM="[INFO] [MAIN]"
+infostrA="[INFO] [APP]"
+infoStrDb="[INFO] [DB]"
+infoStrUd="[INFO] [USERDATA]"
+infoStrF="[INFO] [FUNCTION]"
+errorStrM="$red[ERROR]$rst [MAIN]"
+errorStrA="$red[ERROR]$rst [APP]"
+errorStrDb="$red[ERROR]$rst [DB]"
+errorStrUd="$red[ERROR]$rst [USERDATA]"
+errorStrF="$red[ERROR]$rst [FUNCTION]"
 
 #######################################################################################################################
 
