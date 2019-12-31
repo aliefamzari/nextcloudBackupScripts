@@ -25,9 +25,11 @@ or
 5. Edit mainNcBackup.sh variables to your environment
 6. Execute ./mainNcBackup.Sh
 
+**Note**
+sudo need to be set to never ask password
 
-Not yet supported:
+NOT SUPPORTED:
 1. External data backup
 
-Feel free to use, distribute and modify. Code is not POSIX compliant.   
+*Feel free to use, distribute and modify. Code is not POSIX compliant.   
 
