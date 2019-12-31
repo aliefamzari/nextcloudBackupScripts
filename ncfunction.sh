@@ -20,7 +20,6 @@ function EnableMaintenanceMode() {
 	echo "$(currentTime) ${infoStrF} Set maintenance mode for Nextcloud.."  >> $logPath/ncbackup.log
 	sudo -u ${webserverUser} php ${nextcloudWebDir}/occ maintenance:mode --on
 	echo "$(currentTime) ${infoStrF} Maintenance mode enabled"  >> $logPath/ncbackup.log
-	echo
 }
 
 function DisableMaintenanceMode() {
