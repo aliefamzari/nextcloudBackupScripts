@@ -9,6 +9,7 @@
 ##		Version: 0.1				
 ##		Version Control: Git			 
 ##################################################
+fileName="nextcloud-sqlbkp"
 # Directory write permission check
 if [ ! -x $backupDbDir ]; then
 	echo "$(currentTime) ${errorStrdb} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
@@ -32,8 +33,8 @@ case ${databaseType} in
 			exit 1
 			else
 				echo "$(currentTime) ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileNameDb}_${currentDate}.sql
-				echo "$(currentTime) ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
+				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql
+				echo "$(currentTime) ${infoStrDb} Backup ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
 	;;
 	postgresql) 
@@ -47,8 +48,8 @@ case ${databaseType} in
 			exit 1
 			else
 				echo "$(currentTime) ${infoStrDb} Backing up Database named ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileNameDb}_${currentDate}.sql
-				echo "$(currentTime) ${infoStrDb} Backup ${fileNameDb}_${currentDate}.sql created." >> $logPath/ncbackup.log
+				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${{backupDbDir}}/${fileName}_${currentDate}.sql
+				echo "$(currentTime) ${infoStrDb} Backup ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
 	;;
 	*) 

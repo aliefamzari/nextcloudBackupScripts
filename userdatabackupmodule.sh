@@ -11,13 +11,14 @@
 ##################################################
 
 # Backing up UserData
+fileName="nextcloud-udbkp"
 totalsize=`du -skh $sourceUdir 2>/dev/null |awk '{print $1}'`
 
 echo "$(currentTime) ${infoStrUd} Creating backup of Nextcloud Userdata..." | tee -a $logPath/ncbackup.log
 
 if [ -w ${backupUdDir} ]; then 
 	echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
-	tar -cpzf "${sourceUdDir}/${filenameUd}_${currentDate}.tar.gz" -C "${backupUdDir}" .
+	tar -cpzf "${sourceUdDir}/${fileName}_${currentDate}.tar.gz" -C "${backupUdDir}" .
 	echo "$(currentTime) ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
 	else
 		echo "$(currentTime) ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
