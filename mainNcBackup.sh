@@ -42,7 +42,7 @@ dbName="nextclouddb"								# Change to fit your environment
 maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimited backup.
 
 # TODO: userdatabackupmodule.sh variables
-sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA is located. This is where all the user data located.
+sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA. This is where all the user data located.
 backupUdDir="somedirectory/UD"						# Destination directory where backup will be saved. Change to fit your environment
 maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup.
 
