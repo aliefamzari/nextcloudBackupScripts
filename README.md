@@ -7,7 +7,7 @@ FEATURES:
 6. Auto rollback service in case of failure
 
 USAGE:
-1. Change variable settings in the main script to suit your needs and environment
+1. Change variable settings in the main script mainNcBackup.sh to suit your needs and environment
 2. Execute the main script
 
 INSTALLATION:
