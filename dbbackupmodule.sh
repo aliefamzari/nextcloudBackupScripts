@@ -77,22 +77,22 @@ esac
 nrOfDbBackups=$(ls -l ${backupDbDir} | grep -c 'nextcloud-sqlbkp.*sql')
 nDbBkToRemove=$(( ${nrOfDbBackups} - ${maxNrOfDbBackups} ))
 
-echo "$(currentTime) ${infoStrDb} Checking number of backups available..."  >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrDb} Checking number of backup(s) available..."  >> $logPath/ncbackup.log
 
 if [ ${maxNrOfDbBackups} != 0 ]; then	
-	echo "$(currentTime) ${infoStrDb} Current number of backup available $nrOfDbBackups" >> $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrDb} Current number of backup(s) available $nrOfDbBackups" >> $logPath/ncbackup.log
 		if [ ${nrOfDbBackups} -gt ${maxNrOfDbBackups} ]; then		
-			echo "$(currentTime) ${infoStrDb} Max number of backups is set to $maxNrOfDbBackups. Removing $nDbBkToRemove old backups" >> $logPath/ncbackup.log
+			echo "$(currentTime) ${infoStrDb} Max number of backup(s)  is set to $maxNrOfDbBackups. Removing $nDbBkToRemove old backup(s) " >> $logPath/ncbackup.log
 			ls -t ${backupDbDir} | grep 'nextcloud-sqlbkp.*sql' | tail -$nDbBkToRemove |while read -r dbBkToRemove; do
 				rm "${backupDbDir}/${dbBkToRemove}"
 				echo "$(currentTime) ${infoStrDb} ${dbBkToRemove} - Remove" >> $logPath/ncbackup.log
 				done
 			else
-				echo "$(currentTime) ${infoStrDb} Max number of backups is set to ${maxNrOfDbBackups} to keep. 0 backup removed" >> $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} Max number of backup(s)  is set to ${maxNrOfDbBackups} to keep. 0 backup(s)  removed" >> $logPath/ncbackup.log
 		fi
 	elif [ ${maxNrOfDbBackups} = 0 ]; then
-		echo "$(currentTime) ${infoStrDb} Current no of backups available ${nrOfDbBackups}" >> $logPath/ncbackup.log
-		echo "$(currentTime) ${infoStrDb} Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrDb} Current no of backup(s)  available ${nrOfDbBackups}" >> $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrDb} Max number of backup(s)  is set to \"Unlimited\". 0 backup(s)  removed" >> $logPath/ncbackup.log
 fi
 echo "$(currentTime) ${infoStrDb} Nextcloud Database backup completed" | tee -a $logPath/ncbackup.log
 
