@@ -23,7 +23,7 @@ databaseBackup="enable"		# enable/disable Database Backup		# dbbackupmodule.sh
 userDataBackup="disable"	# enable/disable UserData Backup		# userdatabackupmodule.sh
 
 # TODO: Path Variables
-modulePath="/opt/custom/scripts"					# This is where all the modules should be placed
+modulePath="/opt/custom/scripts"					# This is where all the modules should be placed. Change to fit your environment
 logPath="/opt/log"									# Specify log location. Scipt must have write permission to this path
 
 # TODO: appbackupmodule.sh variables
