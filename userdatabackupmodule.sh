@@ -23,7 +23,7 @@ if [ -w ${backupUdDir} ]; then
 	echo "$(currentTime) ${infoStrUd} ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
 	else
 		echo "$(currentTime) ${errorStrUd} Destination directory ${backupUdDir} inaccessible. Backup aborted" | tee -a $logPath/ncbackup.log
-		echo "$(currentTime) ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
 		StartwebSvcUnit
 		DisableMaintenanceMode
 		echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
