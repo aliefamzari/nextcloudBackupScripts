@@ -24,7 +24,7 @@ userDataBackup="disable"	# enable/disable UserData Backup		# userdatabackupmodul
 
 # TODO: Path Variables
 modulePath="/opt/custom/scripts"					# This is where all the modules should be placed
-logPath="/opt/log"									# Change to fit your environment
+logPath="/opt/log"									# Specify log location. Scipt must have write permission to this path
 
 # TODO: appbackupmodule.sh variables
 webSvcUnit="apache2"								# Usage "apache2" or "nginx". Change to fit your environment
