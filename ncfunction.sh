@@ -31,10 +31,9 @@ function StopwebSvcUnit() {
 		sudo systemctl stop ${webSvcUnit}.service
 		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service stopped" | tee -a $logPath/ncbackup.log
 		else
-			echo "$(currentTime) ${errorStrF} ${webSvcUnit} service failed to stop. See journalctl for more details" | tee -a $logPath/ncbackup.log
+			echo "$(currentTime) ${errorStrF} ${webSvcUnit} service failed to stop. See journalctl for more details. Backup aborted" | tee -a $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrF} [INFO] Restoring main services.."  | tee -a $logPath/ncbackup.log
 			DisableMaintenanceMode
-			echo "$(currentTime) ${errorStrF} NC backup aborted" | tee -a $logPath/ncbackup.log
 			echo "$(currentTime) $red[ERROR]$rst See $logPath/ncbackup.log for more details"
 			exit 1
 	fi
