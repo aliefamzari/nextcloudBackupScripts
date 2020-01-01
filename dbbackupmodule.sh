@@ -90,7 +90,7 @@ if [ ${maxNrOfDbBackups} != 0 ]; then
 			else
 				echo "$(currentTime) ${infoStrDb} Max number of backups is set to ${maxNrOfDbBackups} to keep. 0 backup removed" >> $logPath/ncbackup.log
 		fi
-	elif [ ${maxNrOfDbBackups} = 0]; then
+	elif [ ${maxNrOfDbBackups} = 0 ]; then
 		echo "$(currentTime) ${infoStrDb} Current no of backups available ${nrOfDbBackups}" >> $logPath/ncbackup.log
 		echo "$(currentTime) ${infoStrDb} Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
 fi
