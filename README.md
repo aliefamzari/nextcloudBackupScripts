@@ -1,4 +1,4 @@
-Features:
+FEATURES:
 1. Disable/enable desire module to backup (database, application, user data)
 2. Choose how many backups needed, independently for each module
 3. Fully log for troubleshooting
@@ -7,7 +7,7 @@ Features:
 6. Auto rollback service in case of failure
 
 USAGE:
-1. Change settings in the main script to suit your needs and environment
+1. Change variable settings in the main script to suit your needs and environment
 2. Execute the main script
 
 INSTALLATION:
@@ -32,5 +32,8 @@ sudo need to be set to never ask password
 NOT SUPPORTED:
 1. External data backup
 
-*Feel free to use, distribute and modify. Code is not POSIX compliant.   
+Issues:
+Trap CTRLC INT is not working at the moment.  
+
+*Feel free comment, use, distribute and modify. Code is not POSIX compliant.   
 
