@@ -32,8 +32,6 @@ sudo need to be set to never ask password
 NOT SUPPORTED:
 1. External data backup
 
-Issues:
-Trap CTRLC INT is not working at the moment.  
 
 *Feel free comment, use, distribute and modify. Code is not POSIX compliant.   
 
