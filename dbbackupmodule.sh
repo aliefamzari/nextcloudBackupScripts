@@ -27,7 +27,7 @@ case ${databaseType} in
 		mysql --user=$dbUserName --password=$dbPasswd -e exit 2>> $logPath/ncbackup.log
 		dpasswdStat=$(echo $?)	
 		if [ $dpasswdStat != 0 ]; then
-			echo "$(currentTime) $errorStrDb Your dbpassword or dbusername is incorrect. Backup aborted" | tee -a $logPath/ncbackup.log 
+			echo "$(currentTime) $errorStrDb Your dbPasswd or dbUserName is incorrect. Backup aborted" | tee -a $logPath/ncbackup.log 
 			echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 			StartwebSvcUnit
 			DisableMaintenanceMode
