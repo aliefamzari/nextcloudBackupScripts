@@ -44,7 +44,7 @@ function StartwebSvcUnit() {
 	echo "$(currentTime) ${infoStrF} Starting ${webSvcUnit} service" >> $logPath/ncbackup.log
 	if sudo systemctl start ${webSvcUnit}.service &> /dev/null; then
 		sudo systemctl start ${webSvcUnit}.service
-		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service Started" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrF} ${webSvcUnit} service started" | tee -a $logPath/ncbackup.log
 		else
 			echo "$(currentTime) ${errorStrF} ${webSvcUnit} service failed to start" | tee -a $logPath/ncbackup.log
 			echo "$(currentTime) ${errorStrF} See journalctl for more details" | tee -a $logPath/ncbackup.log
