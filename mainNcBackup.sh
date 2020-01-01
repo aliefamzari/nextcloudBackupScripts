@@ -36,9 +36,9 @@ webserverUser="www-data" 							# Change to fit your environment. Most debian ba
 # TODO: dbbackupmodule.sh variables
 databaseType="mariadb"								# Usage "mariadb" "mysql" "postgresql". Change to fit your environment
 backupDbDir="/opt/nextcloud/data/Backup/DATABASE"	# Destination directory where backup will be saved. Change to fit your environment
-dbUserName="nextcloud"								# Change to fit your environment
-dbPasswd="databasepassword"							# Change to fit your environment
-dbName="nextclouddb"								# Change to fit your environment
+dbUserName="nextcloud"								# Your nextcloud database username. Change to fit your environment
+dbPasswd="databasepassword"							# Your nextcloud database user password. Change to fit your environment
+dbName="nextclouddb"								# Your nextcloud database name. Change to fit your environment
 maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimited backup
 
 # TODO: userdatabackupmodule.sh variables
@@ -85,7 +85,7 @@ if [ -w ${logPath} ]; then
 fi
 sleep 1
 
-# OCC path 
+# OCC path validation
 echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"
 if [ -e ${nextcloudWebDir}/occ ]; then
 	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst"
