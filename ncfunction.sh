@@ -51,19 +51,11 @@ function StartwebSvcUnit() {
 }
 
 ## trapping Ctrl C from user
-# TODO NOT WORKING - TO TEST FURTHER
 function CtrlC() {
-	read -p "Backup interupted by user. Disable maintenance mode? [y/n] " -n 1 -r
-	echo
-	if [[ $yesNo =~ ^[Yy]$ ]]; then
-		DisableMaintenanceMode
-		StartwebSvcUnit
-		echo "$(currentTime) ${errorStrF} Interrupted by user. Backup aborted" | tee -a $logPath/ncbackup.log
-		echo "$(currentTime) $red[ERROR]$rst See $logPath/ncbackup.log for more details"
-		else
-			echo "$(currentTime) Warning. Maintenance mode still enabled." tee -a $logPath/ncbackup.log
-			echo "$(currentTime) $red[ERROR]$rst See $logPath/ncbackup.log for more details"
-	fi
-	exit 1
+	echo "$(currentTime) ${errorStrF} Interrupted by user. Backup aborted" | tee -a $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrF} Restoring main services.." | tee -a $logPath/ncbackup.log
+	DisableMaintenanceMode
+	StartwebSvcUnit
+	echo "$(currentTime) ${infoStrF} See $logPath/ncbackup.log for more details"
+	exit 0
 }
-
