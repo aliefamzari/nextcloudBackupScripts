@@ -6,7 +6,7 @@
 ##		Dependencies: mainNcBackup.sh
 ##		Job retention: n/a
 ##		Job type: Manual
-##		Version: 0.1
+##		Version: 0.5
 ##		Version Control: Git
 ##################################################
 
