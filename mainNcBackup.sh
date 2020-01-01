@@ -27,7 +27,7 @@ modulePath="/opt/custom/scripts"					# This is where all the modules should be p
 logPath="/opt/log"									# Change to fit your environment
 
 # TODO: appbackupmodule.sh variables
-webSvcUnit="apache2"								# Usage "apache2" "apache" or "nginx". Change to fit your environment
+webSvcUnit="apache2"								# Usage "apache2" or "nginx". Change to fit your environment
 nextcloudWebDir="/var/www/html/nextcloud"						# Change to fit your environment
 backupAppDir="/opt/nextcloud/data/Backup/APP"		# Destination directory where backup will be saved. Change to fit your environment
 # fileNameApp="nextcloud-appbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofAppBackups
