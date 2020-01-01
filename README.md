@@ -14,7 +14,8 @@ INSTALLATION:
 1. git clone https://github.com/aliefamzari/nextcloudBackupScripts.git
 2. cd nextcloudBackupScripts
 3. chmod +x *.sh
-4. Execute ./mainNcBackup.sh
+4. Edit mainNcBackup.sh variables to your environment
+5. Execute ./mainNcBackup.sh
 
 or
 
