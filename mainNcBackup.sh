@@ -76,8 +76,6 @@ function currentTime() {
 }
 
 #######################################################################################################################
-# TODO : PATH CHECK nextcloudWebDir="/var/www/html/nextcloud"
-
 # Logpath validation
 echo "$(currentTime) ${infoStrgM} Starting script mainNcBackup.sh"
 sleep 1
@@ -90,20 +88,31 @@ if [ -w ${logPath} ]; then
 fi
 sleep 1
 
-# OCC path validation
+# OCC path 
 echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"
 if [ -e ${nextcloudWebDir}/occ ]; then
-	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst "
+	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst"
 	else
 		echo "$(currentTime) ${errorStrM} ${nextcloudWebDir}/occ ....$red[FAILED]$rst"
 		echo "$(currentTime) ${infoStrgM} Please check your ${nextcloudWebDir}/occ path. Backup aborted"
+		exit 1
+fi
+
+# webserveruser validation
+echo "$(currentTime) ${infoStrgM} Validating webserverUser \"$webserverUser\" "
+getent passwd $webserverUser > /dev/null
+webSvrStat=$(echo $?)
+if [ $webSvrStat = 0 ]; then
+	echo "$(currentTime) ${infoStrgM} webserverUser \"$webserverUser\" ....$green[OK]$rst"
+	else
+		echo "$(currentTime) ${errorStrM} webserverUser \"$webserverUser\"....$red[FAILED]$rst"
+		echo "$(currentTime) ${infoStrgM} Please check your webserverUser value. Backup aborted"
 		exit 1
 fi
 sleep 1
 
 # Module validation
 echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path"
-
 moduleList=(\
 ${modulePath}/appbackupmodule.sh \
 ${modulePath}/dbbackupmodule.sh \
@@ -119,7 +128,6 @@ for i in ${moduleList[@]}; do
         exit 1
     fi
 done
-
 
 ## Head of log file
 echo "$(currentTime) ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
@@ -169,8 +177,8 @@ if [ ${userDataBackup} = "disable" ]; then
         . ${modulePath}/userdatabackupmodule.sh # Executing User Data backup module
 fi
 sleep 1
-echo "$(currentTime) ${infoStrgM} NC Backup completed" | tee -a $logPath/ncbackup.log
 
+echo "$(currentTime) ${infoStrgM} NC Backup completed" | tee -a $logPath/ncbackup.log
 # Restoring Services
 echo "$(currentTime) ${infoStrgM} Restoring main services.." | tee -a $logPath/ncbackup.log
 StartwebSvcUnit
