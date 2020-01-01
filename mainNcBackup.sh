@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Full backup for Nextcloud. Work In progress.
+## 		Full backup for Nextcloud
 ##		Author: Alif Amzari Mohd Azamee
 ##		Date: 2019-12-25
 ##		Job retention: n/a
