@@ -47,4 +47,4 @@ if [ ${maxNrOfAppBackups} != 0 ]; then
 		echo "$(currentTime) $infostrA Current no of backups available ${nrOfApBAckups}" >> $logPath/ncbackup.log
 		echo "$(currentTime) $infostrA Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
 fi
-echo "$(currentTime) $infostrA Nextcloud webapp backup completed" >> $logPath/ncbackup.log
+echo "$(currentTime) $infostrA Nextcloud webapp backup completed" | tee -a $logPath/ncbackup.log

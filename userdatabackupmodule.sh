@@ -50,4 +50,4 @@ if [ ${maxNrOfUdBackups} != 0 ]; then
 			echo "$(currentTime) ${infoStrUd} Current no of backups available ${nrOfUdBackups}" >> $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrUd} Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
 fi
-echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
