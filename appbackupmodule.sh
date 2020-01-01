@@ -19,10 +19,10 @@ if [ -w $backupAppDir ]; then
 	echo "$(currentTime) $infostrA ${fileName}_${currentDate}.tar.gz created" >> $logPath/ncbackup.log
 	else
 		echo "$(currentTime) ${errorStrA} Destination directory ${backupAppDir} inaccesible. Backup aborted" | tee -a $logPath/ncbackup.log
-		echo "$(currentTime) ${errorStrA} Restoring main services.." | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infostrA} Restoring main services.." | tee -a $logPath/ncbackup.log
 		StartwebSvcUnit
 		DisableMaintenanceMode
-		echo "$(currentTime) ${errorStrA} See $logPath/ncbackup.log for more details"
+		echo "$(currentTime) ${infostrA} See $logPath/ncbackup.log for more details"
 		exit 1
 fi
 
