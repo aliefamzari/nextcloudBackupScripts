@@ -24,7 +24,7 @@ fi
 case ${databaseType} in
 	mysql|mariadb) 
 	echo "$(currentTime) ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
-		mysql --user=$dbUserName --password=$dbPasswd -e exit 2>/dev/null
+		mysql --user=$dbUserName --password=$dbPasswd -e exit 2>> $logPath/ncbackup.log
 		dpasswdStat=$(echo $?)	
 		if [ $dpasswdStat != 0 ]; then
 			echo "$(currentTime) $errorStrDb Your dbpassword or dbusername is incorrect. Backup aborted" | tee -a $logPath/ncbackup.log 
@@ -43,7 +43,7 @@ case ${databaseType} in
 				exit 1
 				else
 					echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
-					mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql > >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
+					mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql #> >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
 					echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 			fi
 	;;
@@ -58,7 +58,7 @@ case ${databaseType} in
 			exit 1
 			else
 				echo "$(currentTime) ${infoStrDb} pg_dump database ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
-				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${backupDbDir}/${fileName}_${currentDate}.sql > >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
+				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${backupDbDir}/${fileName}_${currentDate}.sql #> >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
 				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
 	;;
