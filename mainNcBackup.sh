@@ -30,7 +30,6 @@ logPath="/opt/log"									# Change to fit your environment
 webSvcUnit="apache2"								# Usage "apache2" or "nginx". Change to fit your environment
 nextcloudWebDir="/var/www/html/nextcloud"						# Change to fit your environment
 backupAppDir="/opt/nextcloud/data/Backup/APP"		# Destination directory where backup will be saved. Change to fit your environment
-# fileNameApp="nextcloud-appbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofAppBackups
 maxNrOfAppBackups=2 								# Specify how many of backups to keep. 0 means Unlimited backup.
 webserverUser="www-data" 							# Change to fit your environment
 
@@ -40,13 +39,11 @@ backupDbDir="/opt/nextcloud/data/Backup/DATABASE"	# Destination directory where 
 dbUserName="nextcloud"								# Change to fit your environment
 dbPasswd="databasepassword"									# Change to fit your environment
 dbName="nextclouddb"								# Change to fit your environment
-# fileNameDb="nextcloud-sqlbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofDbBackups
 maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimited backup.
 
 # TODO: userdatabackupmodule.sh variables
-sourceUdDir="/opt/nextcloud/data"					# Change to fit your environment
+sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA is located. This is where all the user data located.
 backupUdDir="somedirectory/UD"						# Destination directory where backup will be saved. Change to fit your environment
-# fileNameUd="nextcloud-udbkp"						# DO NOT CHANGE!! Unless you know what your are doing, it will break maxNrofUdBackups
 maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup.
 
 #######################################################################################################################

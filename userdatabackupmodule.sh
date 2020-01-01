@@ -22,7 +22,7 @@ if [ -w ${backupUdDir} ]; then
 	tar -cpzf "${backupUdDir}/${fileName}_${currentDate}.tar.gz" -C "${sourceUdDir}" .
 	echo "$(currentTime) ${infoStrUd} ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
 	else
-		echo "$(currentTime) ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${errorStrUd} No write permission to destination directory ${backupUdDir}. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "$(currentTime) ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
 		StartwebSvcUnit
 		DisableMaintenanceMode
