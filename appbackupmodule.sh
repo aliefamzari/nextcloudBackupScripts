@@ -30,10 +30,10 @@ fi
 nrOfApBAckups=$(ls -l ${backupAppDir} | grep -c 'nextcloud-appbkp.*gz')
 nAbackupToRemove=$(( ${nrOfApBAckups} - ${maxNrOfAppBackups} ))
 
-echo "$(currentTime) $infostrA Checking number of backups available..." >> $logPath/ncbackup.log
+echo "$(currentTime) $infostrA Checking number of backup(s) available..." >> $logPath/ncbackup.log
 
 if [ ${maxNrOfAppBackups} != 0 ]; then	
-	echo "$(currentTime) $infostrA Current no of backups available ${nrOfApBAckups}" >> $logPath/ncbackup.log
+	echo "$(currentTime) $infostrA Current no of backup(s) available ${nrOfApBAckups}" >> $logPath/ncbackup.log
 	if [ ${nrOfApBAckups} -gt ${maxNrOfAppBackups} ]; then		
 		echo "$(currentTime) $infostrA Max number of backup(s) is set to ${maxNrOfAppBackups}. Removing ${nAbackupToRemove} old backup(s)" >> $logPath/ncbackup.log		
 		ls -t ${backupAppDir} | grep 'nextcloud-appbkp.*gz' | tail -$nAbackupToRemove |while read -r aBkpToRemove; do
@@ -41,10 +41,10 @@ if [ ${maxNrOfAppBackups} != 0 ]; then
 			echo "$(currentTime) $infostrA ${aBkpToRemove} - Remove" >> $logPath/ncbackup.log
 			done
 		else
-			echo "$(currentTime) $infostrA Max number of backups is set to ${maxNrOfAppBackups} to keep. 0 backup removed" >> $logPath/ncbackup.log
+			echo "$(currentTime) $infostrA Max number of backup(s) is set to ${maxNrOfAppBackups} to keep. 0 backup(s) removed" >> $logPath/ncbackup.log
 	fi
 	elif [ ${maxNrOfAppBackups} = 0 ]; then
-		echo "$(currentTime) $infostrA Current no of backups available ${nrOfApBAckups}" >> $logPath/ncbackup.log
-		echo "$(currentTime) $infostrA Max number of backups is set to \"Unlimited\". 0 backup removed" >> $logPath/ncbackup.log
+		echo "$(currentTime) $infostrA Current no of backup(s) available ${nrOfApBAckups}" >> $logPath/ncbackup.log
+		echo "$(currentTime) $infostrA Max number of backup(s) is set to \"Unlimited\". 0 backup(s) removed" >> $logPath/ncbackup.log
 fi
 echo "$(currentTime) $infostrA Nextcloud webapp backup completed" | tee -a $logPath/ncbackup.log
