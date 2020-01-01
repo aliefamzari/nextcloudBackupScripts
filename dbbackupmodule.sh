@@ -50,8 +50,8 @@ case ${databaseType} in
 	postgresql) 
 	echo "$(currentTime) ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
 		if [ ! -x "$(command -v pg_dump)" ]; then
-			echo "$(currentTime) ${errorStrDb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
-			echo "$(currentTime) ${errorStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
+			echo "$(currentTime) ${errorStrDb} Command 'pg_dump' not found. Check your databaseType. Backup aborted" | tee -a $logPath/ncbackup.log
+			echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 			StartwebSvcUnit
 			DisableMaintenanceMode
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
