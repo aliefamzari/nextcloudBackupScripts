@@ -30,7 +30,7 @@ logPath="/opt/log"									# Change to fit your environment
 webSvcUnit="apache2"								# Usage "apache2" or "nginx". Change to fit your environment
 nextcloudWebDir="/var/www/html/nextcloud"			# Where your nextcloud web app directory is located. Change to fit your environment
 backupAppDir="/opt/nextcloud/data/Backup/APP"		# Destination directory where backup will be saved. Change to fit your environment
-maxNrOfAppBackups=2 								# Specify how many of backups to keep. 0 means Unlimited backup.
+maxNrOfAppBackups=2 								# Specify how many of backups to keep. 0 means Unlimited backup
 webserverUser="www-data" 							# Change to fit your environment. Most debian based will use www-data. Others may different
 
 # TODO: dbbackupmodule.sh variables
@@ -42,7 +42,7 @@ dbName="nextclouddb"								# Your nextcloud database name. Change to fit your e
 maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimited backup
 
 # TODO: userdatabackupmodule.sh variables
-sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA. This is where all the user data located
+sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA. This is where all the user data located. Change to fit your environment
 backupUdDir="somedirectory/UD"						# Destination directory where backup will be saved. Change to fit your environment
 maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup
 
