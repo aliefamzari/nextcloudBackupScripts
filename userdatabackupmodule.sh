@@ -12,14 +12,15 @@
 
 # Backing up UserData
 fileName="nextcloud-udbkp"
-totalsize=`du -skh $sourceUdir 2>/dev/null |awk '{print $1}'`
+
 
 echo "$(currentTime) ${infoStrUd} Creating backup of Nextcloud Userdata..." | tee -a $logPath/ncbackup.log
 
-if [ -w ${backupUdDir} ]; then 
+if [ -w ${backupUdDir} ] || ; then 
+	totalsize=`du -skh ${sourceUdDir} 2>/dev/null |awk '{print $1}'`
 	echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
-	tar -cpzf "${sourceUdDir}/${fileName}_${currentDate}.tar.gz" -C "${backupUdDir}" .
-	echo "$(currentTime) ${infoStrUd} Nextcloud Userdata backup completed" | tee -a $logPath/ncbackup.log
+	tar -cpzf "${backupUdDir}/${fileName}_${currentDate}.tar.gz" -C "${sourceUdDir}" .
+	echo "$(currentTime) ${infoStrUd} ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
 	else
 		echo "$(currentTime) ${errorStrUd} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "$(currentTime) ${errorStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
@@ -33,7 +34,7 @@ fi
 nrOfUdBackups=$(ls -l ${backupUdDir} | grep -c 'nextcloud-udbkp.*gz')
 nUdbkToRemove=$(( $nrOfUdBackups - $maxNrOfUdBackups ))
 
-echo "$(currentTime) ${errorStrUd} Checking number of backups available..."  >> $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrUd} Checking number of backups available..."  >> $logPath/ncbackup.log
 
 if [ ${maxNrOfUdBackups} != 0 ]; then
 	echo "$(currentTime) ${infoStrUd} Current number of backup available $nrOfUdBackups" >> $logPath/ncbackup.log
