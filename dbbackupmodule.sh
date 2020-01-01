@@ -12,7 +12,7 @@
 fileName="nextcloud-sqlbkp"
 # Directory write permission check
 if [ ! -x $backupDbDir ]; then
-	echo "$(currentTime) ${errorStrdb} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
+	echo "$(currentTime) ${errorStrDb} No write permission to destination directory. Backup aborted" | tee -a $logPath/ncbackup.log
 	echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 	StartwebSvcUnit
 	DisableMaintenanceMode
@@ -24,24 +24,34 @@ fi
 case ${databaseType} in
 	mysql|mariadb) 
 	echo "$(currentTime) ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
-		if [ ! -x "$(command -v mysqldump)" ]; then
-			echo "$(currentTime) ${errorStrdb} Command 'mysqldump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+		mysql --user=$dbUserName --password=$dbPasswd -e exit 2>/dev/null
+		dpasswdStat=$(echo $?)	
+		if [ $dpasswdStat != 0 ]; then
+			echo "$(currentTime) $errorStrDb Your dbpassword or dbusername is incorrect. Backup aborted" | tee -a $logPath/ncbackup.log 
 			echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 			StartwebSvcUnit
 			DisableMaintenanceMode
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
 			exit 1
-			else
-				echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
-				mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql > >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
-				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
 		fi
+			if [ ! -x "$(command -v mysqldump)" ]; then
+				echo "$(currentTime) ${errorStrDb} Command 'mysqldump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
+				StartwebSvcUnit
+				DisableMaintenanceMode
+				echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
+				exit 1
+				else
+					echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
+					mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql > >(tee -a $logPath/ncbackup.log) 2> >(tee -a $logPath/ncbackup.log >&2)
+					echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." >> $logPath/ncbackup.log
+			fi
 	;;
 	postgresql) 
 	echo "$(currentTime) ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
 		if [ ! -x "$(command -v pg_dump)" ]; then
-			echo "$(currentTime) ${errorStrdb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
-			echo "$(currentTime) ${errorStrdb} Restoring main services.." | tee -a $logPath/ncbackup.log
+			echo "$(currentTime) ${errorStrDb} Command 'pg_dump' not found. Backup aborted" | tee -a $logPath/ncbackup.log
+			echo "$(currentTime) ${errorStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 			StartwebSvcUnit
 			DisableMaintenanceMode
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
@@ -53,7 +63,7 @@ case ${databaseType} in
 		fi
 	;;
 	*) 
-	echo "$(currentTime) ${errorStrdb} Something not quite right. Check databaseType \"${databaseType}\" in main script. Backup aborted" | tee -a $logPath/ncbackup.log
+	echo "$(currentTime) ${errorStrDb} Something not quite right. Check databaseType \"${databaseType}\" in main script. Backup aborted" | tee -a $logPath/ncbackup.log
 	echo "$(currentTime) ${infoStrDb} Restoring main services.." | tee -a $logPath/ncbackup.log
 	StartwebSvcUnit
 	DisableMaintenanceMode
