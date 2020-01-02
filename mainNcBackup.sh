@@ -5,7 +5,6 @@
 ##		Date: 2019-12-25
 ##		Job retention: n/a
 ##		Job type: Manual
-##		Version: 0.5
 ##		Version Control: Git
 ##		Modules: -
 ##			appbackupmodule.sh
