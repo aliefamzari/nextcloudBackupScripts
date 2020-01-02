@@ -13,7 +13,7 @@ fileName="nextcloud-appbkp"
 echo "$(currentTime) $infostrA Creating backup of Nextcloud webapp directory..." | tee -a $logPath/ncbackup.log
 
 if [ -w $backupAppDir ]; then
-	echo "$(currentTime) $infostrA Tarballing ${nextcloudWebDir} to ${backupAppDir}"
+	echo "$(currentTime) $infostrA Tarballing ${nextcloudWebDir} to ${backupAppDir}" >> $logPath/ncbackup.log
 	tar -zcpf "${backupAppDir}/${fileName}_${currentDate}.tar.gz" -C "${nextcloudWebDir}" . 
 	echo "$(currentTime) $infostrA ${fileName}_${currentDate}.tar.gz created" >> $logPath/ncbackup.log
 	else
