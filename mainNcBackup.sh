@@ -143,7 +143,7 @@ EnableMaintenanceMode
 sleep 1
 
 # Stopping webSvcUnit service
-echo "$(currentTime) ${infoStrgM} Stopping $webSvcUnit service" | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Attempting to stop $webSvcUnit service" | tee -a $logPath/ncbackup.log
 StopwebSvcUnit
 sleep 1
 
