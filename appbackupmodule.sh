@@ -15,7 +15,7 @@ echo "$(currentTime) $infostrA Creating backup of Nextcloud webapp directory..."
 if [ -w $backupAppDir ]; then
 	echo "$(currentTime) $infostrA Tarballing ${nextcloudWebDir} to ${backupAppDir}" >> $logPath/ncbackup.log
 	tar -zcpf "${backupAppDir}/${fileName}_${currentDate}.tar.gz" -C "${nextcloudWebDir}" . 
-	echo "$(currentTime) $infostrA ${fileName}_${currentDate}.tar.gz created" >> $logPath/ncbackup.log
+	echo "$(currentTime) $infostrA ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
 	else
 		echo "$(currentTime) ${errorStrA} Destination directory ${backupAppDir} inaccesible. Backup aborted" | tee -a $logPath/ncbackup.log
 		echo "$(currentTime) ${infostrA} Restoring main services.." | tee -a $logPath/ncbackup.log
