@@ -23,6 +23,7 @@ fi
 case ${databaseType} in
 	mysql|mariadb) 
 	echo "$(currentTime) ${infoStrDb} Database type is ${databaseType}" >> $logPath/ncbackup.log
+	echo "$(currentTime) ${infoStrDb} Validating dbUserName and dbPasswd" >> $logPath/ncbackup.log
 		mysql --user=$dbUserName --password=$dbPasswd -e exit 2>> $logPath/ncbackup.log
 		dpasswdStat=$(echo $?)	
 		if [ $dpasswdStat != 0 ]; then
