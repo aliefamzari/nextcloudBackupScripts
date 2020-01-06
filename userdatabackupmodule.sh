@@ -59,7 +59,7 @@ case $backupType in
 		echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 		if [ -x $(command -v rsync) ]; then
 			echo "Rsyncing with options [-aq --no-o --no-g] from ${sourceUdDir} to ${backupUdDir}" >> $logPath/ncbackup.log
-			rsync -aq --no-o --no-g ${sourceUdDir} ${backupUdDir}
+			rsync -aq --no-o --no-g ${sourceUdDir} ${backupUdDir} 2>> $logPath/ncbackup.log
 			echo "Rsync complete" >> $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
 			else
@@ -72,5 +72,3 @@ case $backupType in
 		fi
 	;;
 esac
-
-
