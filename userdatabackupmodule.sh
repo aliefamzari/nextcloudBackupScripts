@@ -59,6 +59,7 @@ case $backupType in
 		echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 		if [ command -v rsync ]; then
 			rsync -aq ${sourceUdDir} ${backupUdDir}
+			echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
 			else
 				echo "Command 'rsync' not found. Backup aborted" 
 					echo "$(currentTime) ${infoStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
