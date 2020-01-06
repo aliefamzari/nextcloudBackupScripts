@@ -25,7 +25,7 @@ fi
 
 case $backupType in 
 	tarball)
-		echo "backupType selected is $backupType"
+		echo "backupType selected is $backupType" tee -a $logPath/ncbackup.log
 		echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 		tar -cpzf "${backupUdDir}/${fileName}_${currentDate}.tar.gz" -C "${sourceUdDir}" .
 		echo "$(currentTime) ${infoStrUd} ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
