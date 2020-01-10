@@ -64,11 +64,11 @@ case $backupType in
 			echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
 			else
 				echo "Command 'rsync' not found. Backup aborted" 
-					echo "$(currentTime) ${infoStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
-					StartwebSvcUnit
-					DisableMaintenanceMode
-					echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
-					exit 1
+				echo "$(currentTime) ${infoStrUd} Restoring main services.." | tee -a $logPath/ncbackup.log
+				StartwebSvcUnit
+				DisableMaintenanceMode
+				echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
+				exit 1
 		fi
 	;;
 esac
