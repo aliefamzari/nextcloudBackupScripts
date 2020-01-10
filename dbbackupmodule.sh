@@ -44,7 +44,7 @@ case ${databaseType} in
 				else
 					echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
 					mysqldump --single-transaction -h localhost -u ${dbUserName} -p${dbPasswd} ${dbName} > ${backupDbDir}/${fileName}_${currentDate}.sql 
-					echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." | tee -a $logPath/ncbackup.log
+					echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql - Created." | tee -a $logPath/ncbackup.log
 			fi
 	;;
 	postgresql) 
@@ -59,7 +59,7 @@ case ${databaseType} in
 			else
 				echo "$(currentTime) ${infoStrDb} pg_dump database ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
 				PGPASSWORD=${dbPasswd} pg_dump ${dbName} -h localhost -U ${dbUserName} -f ${backupDbDir}/${fileName}_${currentDate}.sql 
-				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql created." | tee -a $logPath/ncbackup.log
+				echo "$(currentTime) ${infoStrDb} ${fileName}_${currentDate}.sql - Created." | tee -a $logPath/ncbackup.log
 		fi
 	;;
 	*) 
