@@ -46,6 +46,9 @@ backupUdDir="somedirectory/UD"						# Destination directory where backup will be
 maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup
 backupType="rsync"									# Specify which backup type to execute. Usage 'rsync' or 'tarball'
 #If rsync where chosen, only 1 backup were kept
+
+# TODO: send log file to your email if backup fail
+recipient="youremail@domain.com"
 #######################################################################################################################
 
 # tput for color highlight
