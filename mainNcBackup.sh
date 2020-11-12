@@ -43,7 +43,7 @@ maxNrOfDbBackups=2									# Specify how many of backups to keep. 0 means Unlimi
 # TODO: userdatabackupmodule.sh variables
 sourceUdDir="/opt/nextcloud/data"					# Source of your nextcloud DATA. This is where all the user data located. Change to fit your environment
 backupUdDir="somedirectory/UD"						# Destination directory where backup will be saved. Change to fit your environment
-maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup
+maxNrOfUdBackups=1									# Specify how many of backups to keep. 0 means Unlimited backup. Not applicable for for 'rsync' type backup
 backupType="rsync"									# Specify which backup type to execute. Usage 'rsync' or 'tarball'
 #If rsync where chosen, only 1 backup were kept
 
