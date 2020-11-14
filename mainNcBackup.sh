@@ -89,7 +89,7 @@ fi
 sleep 1
 
 # OCC path validation
-echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"  | tee -a $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"  | tee $logPath/ncbackup.log
 if [ -e ${nextcloudWebDir}/occ ]; then
 	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst" | tee -a $logPath/ncbackup.log
 	else
@@ -130,7 +130,7 @@ for i in ${moduleList[@]}; do
 done
 
 ## Head of log file
-echo "$(currentTime) ${infoStrgM} NC backup started..." | tee $logPath/ncbackup.log
+echo "$(currentTime) ${infoStrgM} NC backup started..." | tee -a $logPath/ncbackup.log
 
 # Load function
 echo "$(currentTime) ${infoStrgM} Loading function ncfunction.sh" >> $logPath/ncbackup.log
