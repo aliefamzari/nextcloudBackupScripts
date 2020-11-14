@@ -89,30 +89,30 @@ fi
 sleep 1
 
 # OCC path validation
-echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"
+echo "$(currentTime) ${infoStrgM} Validating ${nextcloudWebDir}/occ path"  | tee -a $logPath/ncbackup.log
 if [ -e ${nextcloudWebDir}/occ ]; then
-	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst"
+	echo "$(currentTime) ${infoStrgM} ${nextcloudWebDir}/occ ....$green[OK]$rst" | tee -a $logPath/ncbackup.log
 	else
-		echo "$(currentTime) ${errorStrM} ${nextcloudWebDir}/occ ....$red[FAILED]$rst"
-		echo "$(currentTime) ${infoStrgM} Please check your ${nextcloudWebDir}/occ path. Backup aborted"
+		echo "$(currentTime) ${errorStrM} ${nextcloudWebDir}/occ ....$red[FAILED]$rst" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrgM} Please check your ${nextcloudWebDir}/occ path. Backup aborted" | tee -a $logPath/ncbackup.log
 		exit 1
 fi
 
 # webserveruser validation
-echo "$(currentTime) ${infoStrgM} Validating webserverUser \"$webserverUser\" "
-getent passwd $webserverUser > /dev/null
+echo "$(currentTime) ${infoStrgM} Validating webserverUser \"$webserverUser\" " | tee -a $logPath/ncbackup.log
+getent passwd $webserverUser > /dev/null 
 webSvrStat=$(echo $?)
 if [ $webSvrStat = 0 ]; then
-	echo "$(currentTime) ${infoStrgM} webserverUser \"$webserverUser\" ....$green[OK]$rst"
+	echo "$(currentTime) ${infoStrgM} webserverUser \"$webserverUser\" ....$green[OK]$rst" | tee -a $logPath/ncbackup.log
 	else
-		echo "$(currentTime) ${errorStrM} webserverUser \"$webserverUser\"....$red[FAILED]$rst"
-		echo "$(currentTime) ${infoStrgM} Please check your webserverUser value. Backup aborted"
+		echo "$(currentTime) ${errorStrM} webserverUser \"$webserverUser\"....$red[FAILED]$rst" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrgM} Please check your webserverUser value. Backup aborted" | tee -a $logPath/ncbackup.log
 		exit 1
 fi
 sleep 1
 
 # Module validation
-echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path"
+echo "$(currentTime) ${infoStrgM} Validating ${modulePath} path" | tee -a $logPath/ncbackup.log
 moduleList=(\
 ${modulePath}/appbackupmodule.sh \
 ${modulePath}/dbbackupmodule.sh \
@@ -121,10 +121,10 @@ ${modulePath}/ncfunction.sh)
 
 for i in ${moduleList[@]}; do
     if [ -x $i ]; then
-    echo "$(currentTime) ${infoStrgM} $i ....$green[OK]$rst"
+    echo "$(currentTime) ${infoStrgM} $i ....$green[OK]$rst" | tee -a $logPath/ncbackup.log
     else
-        echo "$(currentTime) ${errorStrM} $i ....$red[FAILED]$rst"
-		echo "$(currentTime) ${infoStrgM} Please check your module path. Backup aborted"
+        echo "$(currentTime) ${errorStrM} $i ....$red[FAILED]$rst" | tee -a $logPath/ncbackup.log
+		echo "$(currentTime) ${infoStrgM} Please check your module path. Backup aborted" | tee -a $logPath/ncbackup.log
         exit 1
     fi
 done
