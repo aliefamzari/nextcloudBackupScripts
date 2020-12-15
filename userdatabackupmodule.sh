@@ -62,7 +62,7 @@ case $backupType in
 		if [ -x $(command -v rsync) ]; then
 			echo "$(currentTime) ${infoStrUd} Rsyncing with options [-aq --no-o --no-g] from ${sourceUdDir} to ${backupUdDir}" >> $logPath/ncbackup.log
 			rsync -aq --no-o --no-g ${sourceUdDir} ${backupUdDir} 2>> $logPath/ncbackup.log && mail -s "rsync error" aliefamzari@gmail.com 
-                        rsycnerror=$(echo $?)
+                        rsyncerror=$(echo $?)
 			echo "Rsync complete" >> $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
 			else
