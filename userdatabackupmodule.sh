@@ -28,6 +28,7 @@ case $backupType in
 		echo "backupType selected is $backupType" tee -a $logPath/ncbackup.log
 		echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 		tar -cpzf "${backupUdDir}/${fileName}_${currentDate}.tar.gz" -C "${sourceUdDir}" .
+                tarerror=$(echo $?)
 		echo "$(currentTime) ${infoStrUd} ${fileName}_${currentDate}.tar.gz created" | tee -a $logPath/ncbackup.log
 
 		# Delete old backup if required
@@ -42,6 +43,7 @@ case $backupType in
 			echo "$(currentTime) ${infoStrUd} Max number of backup(s) is set to ${maxNrOfUdBackups}. Removing ${nUdbkToRemove} old backup(s)" >> $logPath/ncbackup.log
 			ls -t ${backupUdDir} | grep 'nextcloud-udbkp.*gz' | tail -$nUdbkToRemove |while read -r udFileToRemove; do
 				rm "${backupUdDir}/${udFileToRemove}"
+                                rmerror=$(echo $?)
 				echo "$(currentTime) ${infoStrUd} ${udFileToRemove} - Remove" >> $logPath/ncbackup.log
 				done
 			else
@@ -59,7 +61,8 @@ case $backupType in
 		echo "$(currentTime) ${infoStrUd} Total size of source directory is $totalsize. This will take awhile depending on the size..." | tee -a $logPath/ncbackup.log
 		if [ -x $(command -v rsync) ]; then
 			echo "$(currentTime) ${infoStrUd} Rsyncing with options [-aq --no-o --no-g] from ${sourceUdDir} to ${backupUdDir}" >> $logPath/ncbackup.log
-			rsync -aq --no-o --no-g ${sourceUdDir} ${backupUdDir} 2>> $logPath/ncbackup.log
+			rsync -aq --no-o --no-g ${sourceUdDir} ${backupUdDir} 2>> $logPath/ncbackup.log && mail -s "rsync error" aliefamzari@gmail.com 
+                        rsycnerror=$(echo $?)
 			echo "Rsync complete" >> $logPath/ncbackup.log
 			echo "$(currentTime) ${infoStrUd} Nextcloud UserData backup completed" | tee -a $logPath/ncbackup.log
 			else
