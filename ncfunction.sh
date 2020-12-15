@@ -58,3 +58,9 @@ function CtrlC() {
 	echo "$(currentTime) ${infoStrF} See $logPath/ncbackup.log for more details"
 	exit 0
 }
+
+function sendmail() {
+        mail -s "Nextcloud backup error" $recipient < $logPath/ncbackup.log
+}
+
+
