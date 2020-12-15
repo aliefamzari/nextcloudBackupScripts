@@ -22,7 +22,7 @@ if [ -w $backupAppDir ]; then
 		StartwebSvcUnit
 		DisableMaintenanceMode
 		echo "$(currentTime) ${infostrA} See $logPath/ncbackup.log for more details"
-		mail -s "Nextcloud backup failed" $recipient < $logPath/ncbackup.log
+                sendmail
 		exit 1
 fi
 
