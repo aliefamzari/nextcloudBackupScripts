@@ -16,6 +16,7 @@ if [ ! -x $backupDbDir ]; then
 	StartwebSvcUnit
 	DisableMaintenanceMode
 	echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
+        sendmail
 	exit 1
 fi
 
@@ -32,6 +33,7 @@ case ${databaseType} in
 			StartwebSvcUnit
 			DisableMaintenanceMode
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
+                        sendmail
 			exit 1
 		fi
 			if [ ! -x "$(command -v mysqldump)" ]; then
@@ -40,6 +42,7 @@ case ${databaseType} in
 				StartwebSvcUnit
 				DisableMaintenanceMode
 				echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
+                                sendmail
 				exit 1
 				else
 					echo "$(currentTime) ${infoStrDb} mysqldump database ${dbName} to ${backupDbDir}" >> $logPath/ncbackup.log
@@ -55,6 +58,7 @@ case ${databaseType} in
 			StartwebSvcUnit
 			DisableMaintenanceMode
 			echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details"
+                        sendmail
 			exit 1
 			else
 				echo "$(currentTime) ${infoStrDb} pg_dump database ${dbName} to this directory ${backupDbDir}" >> $logPath/ncbackup.log
@@ -68,6 +72,7 @@ case ${databaseType} in
 	StartwebSvcUnit
 	DisableMaintenanceMode
 	echo "$(currentTime) ${infoStrDb} See $logPath/ncbackup.log for more details" | tee -a $logPath/ncbackup.log
+        sendmail
 	exit 1
 	;;
 esac		

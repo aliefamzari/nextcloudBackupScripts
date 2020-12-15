@@ -20,6 +20,7 @@ if [ ! -w $backupUdDir ]; then
 	StartwebSvcUnit
 	DisableMaintenanceMode
 	echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
+        sendmail
     exit 1
 fi
 
@@ -71,6 +72,7 @@ case $backupType in
 				StartwebSvcUnit
 				DisableMaintenanceMode
 				echo "$(currentTime) ${infoStrUd} See $logPath/ncbackup.log for more details"
+                                sendmail
 				exit 1
 		fi
 	;;

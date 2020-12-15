@@ -59,6 +59,7 @@ function CtrlC() {
 	exit 0
 }
 
+## Send email function
 function sendmail() {
         mail -s "Nextcloud backup error" $recipient < $logPath/ncbackup.log
 }
