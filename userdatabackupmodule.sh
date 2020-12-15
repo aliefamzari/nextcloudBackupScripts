@@ -77,7 +77,7 @@ case $backupType in
 		fi
 	;;
 esac
-$outval=$((tarerror+rmerror+rsyncerror))
+outval=$((tarerror+rmerror+rsyncerror))
 if [ $outval != 0 ]; then
         sendmail
 fi
